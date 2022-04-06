@@ -1,0 +1,409 @@
+@import url("https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Poppins:wght@400;500;600;700;800;900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Hurricane&family=Roboto:wght@100&display=swap");
+
+/*resetleme kodları*/
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+  font-family: "Poppins", sans-serif;
+}
+a,
+a:link,
+a:visited {
+  text-decoration: none;
+  outline: none;
+  border: none;
+}
+
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+section,
+span,
+p {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+}
+/*reset kodu bitiş*/
+
+/* header start */
+
+.container {
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.header {
+  background-image: url(images/background.jpg);
+  background-position: center; /* pozisyonu merkeze aldı*/
+  background-size: cover; /* resmin olduğu  divi kaplamasını sağlar*/
+  background-attachment: fixed; /*sabit kalmasını sağladı*/
+  height: 15vh; /*yüksekliğini(vh dedi çünkü her tipe uygun olması için) sayfa boyunca ayarladı*/
+  overflow: hidden;
+}
+.header-navbar {
+  display: flex; /* bu divin içindeki divleri yan yana getirdi*/
+  align-items: center; /* içindeki divleri dikeyde ve yatayda ortaladı*/
+  justify-content: space-between; /*içindeki divlerin arasına boşluk*/
+  padding: 20px 20px;
+}
+
+.header a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.header-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.header-logo-text h2 {
+  color: #ffd369;
+  font-family: "Herr Von Muellerhoff", cursive;
+  font-size: 2rem;
+}
+
+#pnglogo {
+  border-radius: 250px;
+  height: 70px;
+}
+ul {
+  display: flex;
+}
+
+li {
+  margin-left: 27px;
+}
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.header-navbar a:hover,
+.dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+.dropdown img {
+  height: 13px;
+  width: 13px;
+  margin-left: 10px;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+h1 {
+  font-size: 8.5rem;
+  font-weight: 100;
+  line-height: 0.4; /*satır boşluğu*/
+  letter-spacing: 2px;
+  font-family: "Herr Von Muellerhoff", cursive;
+  color: #ffd369;
+}
+
+.first-letter {
+  font-size: 10.3rem;
+  font-family: "Herr Von Muellerhoff", cursive;
+  color: #ffd369;
+}
+
+h3 {
+  margin-bottom: 25px;
+  font-size: 20px;
+  color: #eeeeee;
+  font-family: "Hurricane", cursive;
+  font-family: "Roboto", sans-serif;
+}
+/*header finish*/
+
+/*sign up*/
+.sign-up {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sign-up {
+  background-image: url(images/faq.jpg);
+  background-position: center; /* pozisyonu merkeze aldı*/
+  background-size: cover; /* resmin olduğu  divi kaplamasını sağlar*/
+  background-attachment: fixed; /*sabit kalmasını sağladı*/
+  height: 85vh; /*yüksekliğini(vh dedi çünkü her tipe uygun olması için) sayfa boyunca ayarladı*/
+  overflow: hidden;
+}
+.card {
+  color: white;
+
+  background-color: rgba(0, 0, 0, 0.514);
+  min-width: 500px;
+  min-height: 500px;
+  border-radius: 15px;
+}
+.card h3 {
+  padding: 30px;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: bold;
+  color: white;
+}
+.form-group {
+  font-size: 20px;
+  margin: 20px;
+}
+.form-group input {
+  display: block;
+  width: 90%;
+  padding: 10px 0;
+  margin-top: 10px;
+  background-color: transparent;
+  border: 0;
+  color: white;
+  height: 30px;
+  font-size: 20px;
+  box-shadow: 0 1px 0 0 white;
+  transition: all 0.5s linear;
+}
+.form-group input:focus,
+.form-group input:valid {
+  outline: none;
+  height: 60px;
+}
+.form-group img {
+  height: 17.5px;
+  width: 20px;
+}
+.card .btn {
+  display: block;
+  margin: 40px auto;
+  text-align: center;
+  background-color: #f9f9f9;
+  color: black;
+  padding: 10px 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 20px;
+}
+.card .btn:focus {
+  outline: none;
+}
+.card .btn:hover {
+  background-color: rgba(15, 12, 12, 0.664);
+  color: white;
+}
+.card .btn:active {
+  position: relative;
+  top: 2px;
+}
+.sign-up .card a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  font-size: 18px;
+  padding: 10px;
+}
+.card a:hover {
+  text-decoration: underline;
+}
+
+/*Footer*/
+footer {
+  bottom: 0;
+  margin-top: 0;
+}
+
+.footer-part {
+  background-color: #222831;
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+  font: bold 16px sans-serif;
+  padding: 50px 50px 60px 50px;
+  margin-top: 0;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* Footer left */
+
+.footer-left {
+  width: 30%;
+}
+
+.footer-part h3 {
+  color: #ffd369;
+  font-family: "Herr Von Muellerhoff", cursive;
+  font-size: 5rem;
+  margin: 0;
+}
+/* Footer links */
+
+.footer-links {
+  color: #ffffff;
+  margin: 20px 0 12px;
+}
+
+.footer-links a {
+  display: inline-block;
+  line-height: 1.8;
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-company-name {
+  color: #8f9296;
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0;
+}
+
+/* Footer Center */
+
+.footer-center {
+  width: 35%;
+}
+
+.footer-center img {
+  width: 38px;
+  height: 38px;
+  text-align: center;
+  line-height: 42px;
+  margin: 10px 15px;
+  vertical-align: middle;
+}
+
+.footer-center img {
+  font-size: 17px;
+  line-height: 38px;
+}
+
+.footer-center p {
+  display: inline-block;
+  color: #ffffff;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.footer-center p span {
+  display: block;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.footer-center p a {
+  color: #ffff;
+  text-decoration: none;
+}
+
+/* Footer Right */
+
+.footer-right {
+  width: 30%;
+}
+
+.footer-company-about {
+  line-height: 20px;
+  color: #92999f;
+  font-size: 13px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.footer-company-about span {
+  display: block;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.footer-img {
+  margin-top: 25px;
+}
+.footer-img img {
+  width: 38px;
+  height: 38px;
+}
+
+.footer-img a {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+
+  border-radius: 100px;
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 35px;
+  margin-right: 3px;
+  margin-bottom: 5px;
+}
+
+.footer-img a:hover {
+  background-color: white;
+}
+
+.footer-links a:hover {
+  color: black;
+}
