@@ -27,24 +27,6 @@ li {
   padding: 0;
 }
 
-section,
-span,
-p {
-  margin: 0;
-  padding: 0;
-  outline: none;
-  border: none;
-}
-html::-webkit-scrollbar {
-  width: 1.4rem;
-}
-
-html::-webkit-scrollbar-track {
-  background: #222;
-}
-html::-webkit-scrollbar-thumb {
-  background: #f9ca24;
-}
 /*reset kodu bitiş*/
 
 /* header start */
@@ -61,6 +43,11 @@ html::-webkit-scrollbar-thumb {
   background-attachment: fixed; /*sabit kalmasını sağladı*/
   height: 15vh; /*yüksekliğini(vh dedi çünkü her tipe uygun olması için) sayfa boyunca ayarladı*/
   overflow: hidden;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1000;
 }
 .header-navbar {
   display: flex; /* bu divin içindeki divleri yan yana getirdi*/
@@ -93,7 +80,7 @@ html::-webkit-scrollbar-thumb {
   border-radius: 250px;
   height: 70px;
 }
-ul {
+header ul {
   display: flex;
 }
 
@@ -101,12 +88,12 @@ li {
   margin-left: 27px;
   margin-right: 20px;
 }
-.dropdown {
+header.dropdown {
   float: left;
   overflow: hidden;
 }
 
-.dropdown .dropbtn {
+header .dropdown .dropbtn {
   font-size: 16px;
   border: none;
   outline: none;
@@ -124,7 +111,7 @@ li {
 
 .dropdown-content {
   display: none;
-  position: absolute;
+  position: fixed;
   background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -168,7 +155,7 @@ h1 {
   color: #ffd369;
 }
 
-h3 {
+.header h3 {
   margin-bottom: 25px;
   font-size: 20px;
   color: #eeeeee;
@@ -176,25 +163,112 @@ h3 {
   font-family: "Roboto", sans-serif;
 }
 /*header finish*/
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+body {
+  background-color: #333;
+  overflow-x: hidden;
+  padding-left: 35rem;
+  padding-top: 15vh;
+}
+section {
+  min-height: 100vh;
+  padding: 20px 1rem;
+}
+html::-webkit-scrollbar {
+  width: 1.4rem;
+}
 
-/*sign up*/
-.sign-up {
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
+html::-webkit-scrollbar-track {
+  background: #222;
+}
+html::-webkit-scrollbar-thumb {
+  background: #f9ca24;
+}
+
+/*Choice Start*/
+.heading {
+  text-align: center;
+  margin: 0 6rem;
+  font-size: 4rem;
+  padding: 1rem;
+  border-bottom: 0.1rem solid #fff4;
+  color: #fff;
+}
+
+.heading span {
+  color: #f9ca24;
+}
+
+.choice {
+  position: fixed;
+  top: 15vh;
+  left: 0;
+  z-index: 1000;
+  height: 100%;
+  width: 35rem;
+  background: #111;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-flow: column;
+  text-align: center;
+  padding-bottom: 90px;
 }
-.sign-up {
-  background-image: url(images/faq.jpg);
-  background-position: center; /* pozisyonu merkeze aldı*/
-  background-size: cover; /* resmin olduğu  divi kaplamasını sağlar*/
-  background-attachment: fixed; /*sabit kalmasını sağladı*/
-  height: 85vh; /*yüksekliğini(vh dedi çünkü her tipe uygun olması için) sayfa boyunca ayarladı*/
-  overflow: hidden;
+
+.choice .user img {
+  height: 17rem;
+  width: 17rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 0.7rem solid #f9ca24;
+  padding: 15px;
 }
-.card {
+
+.choice .user .name {
+  font-size: 3.5rem;
+  color: #fff;
+}
+
+.choice .user .post {
+  font-size: 2rem;
+  color: #eee;
+}
+
+.choice .navbar {
+  width: 100%;
+}
+
+.choice .navbar ul {
+  list-style: none;
+  padding: 1rem 3rem;
+}
+
+.choice .navbar ul li a {
+  display: block;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  background: #333;
+  color: #fff;
+  font-size: 2rem;
+  border-radius: 5rem;
+}
+
+.choice .navbar ul li a:hover {
+  background: #f9ca24;
+}
+/*about*/
+.information {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #111;
+}
+.information .row {
   color: white;
 
   background-color: rgba(0, 0, 0, 0.514);
@@ -202,19 +276,12 @@ h3 {
   min-height: 500px;
   border-radius: 15px;
 }
-.card h3 {
-  padding: 30px;
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: bold;
-  color: white;
-}
-.form-group {
+
+.information .row .form-group {
   font-size: 20px;
   margin: 20px;
 }
-.form-group input {
+.information .row .form-group input {
   display: block;
   width: 90%;
   padding: 10px 0;
@@ -227,16 +294,13 @@ h3 {
   box-shadow: 0 1px 0 0 white;
   transition: all 0.5s linear;
 }
-.form-group input:focus,
-.form-group input:valid {
+.information .row .form-group input:focus,
+.information .row .form-group input:valid {
   outline: none;
   height: 60px;
 }
-.form-group img {
-  height: 17.5px;
-  width: 20px;
-}
-.card .btn {
+
+.information .row .btn {
   display: block;
   margin: 40px auto;
   text-align: center;
@@ -248,18 +312,18 @@ h3 {
   border-radius: 5px;
   font-size: 20px;
 }
-.card .btn:focus {
+.information .row .btn:focus {
   outline: none;
 }
-.card .btn:hover {
-  background-color: rgba(15, 12, 12, 0.664);
+.information .row .btn:hover {
+  background-color: #f9ca24;
   color: white;
 }
-.card .btn:active {
+.information .row .btn:active {
   position: relative;
   top: 2px;
 }
-.sign-up .card a {
+.information .row a {
   display: block;
   text-decoration: none;
   color: white;
@@ -267,8 +331,239 @@ h3 {
   font-size: 18px;
   padding: 10px;
 }
-.card a:hover {
+.information .row a:hover {
   text-decoration: underline;
+}
+
+/*Password*/
+
+.change-password {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #111;
+}
+.change-password .row {
+  color: white;
+
+  background-color: rgba(0, 0, 0, 0.514);
+  min-width: 500px;
+  min-height: 500px;
+  border-radius: 15px;
+}
+
+.change-password .row .form-group {
+  font-size: 20px;
+  margin: 20px;
+}
+.change-password .row .form-group input {
+  display: block;
+  width: 90%;
+  padding: 10px 0;
+  margin-top: 10px;
+  background-color: transparent;
+  border: 0;
+  color: white;
+  height: 30px;
+  font-size: 20px;
+  box-shadow: 0 1px 0 0 white;
+  transition: all 0.5s linear;
+}
+.change-password .row .form-group input:focus,
+.change-password .row .form-group input:valid {
+  outline: none;
+  height: 60px;
+}
+
+.change-password .row .btn {
+  display: block;
+  margin: 40px auto;
+  text-align: center;
+  background-color: #f9f9f9;
+  color: black;
+  padding: 10px 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 20px;
+}
+.change-password .row .btn:focus {
+  outline: none;
+}
+.change-password .row .btn:hover {
+  background-color: #f9ca24;
+  color: white;
+}
+.change-password .row .btn:active {
+  position: relative;
+  top: 2px;
+}
+.change-password .row a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  font-size: 18px;
+  padding: 10px;
+}
+.change-password .row a:hover {
+  text-decoration: underline;
+}
+
+/*My Rental*/
+.my-rentals {
+  background: #111;
+}
+.car-menu {
+  background-color: black;
+}
+.car-menu-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 1.5rem;
+  padding: 50px 200px;
+}
+
+.car-box {
+  padding: 2rem;
+  text-align: center;
+  border: 0.1rem solid rgba(255, 255, 255, 0.3);
+}
+
+.car-box img {
+  height: 10rem;
+}
+
+.car-box h2 {
+  color: #fff;
+  font-size: 1.5rem;
+  padding: 0.1rem 0;
+}
+.car-box h3 {
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 0.1rem 0;
+}
+.car-box h5 {
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.1rem 0;
+}
+
+.car-box .price {
+  color: #fff;
+  font-size: 1.5rem;
+  padding: 0.1rem 0;
+}
+
+.car-box:hover {
+  background: #fff;
+}
+.car-box:hover > * {
+  color: #13131a;
+}
+.car-box a {
+  margin-top: 0;
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  font-size: 1.2rem;
+  color: black;
+  background-color: white;
+  cursor: pointer;
+  border: 2px solid white;
+  border-radius: 50px;
+}
+
+.car-box a:hover {
+  letter-spacing: 0.2rem;
+  background: black;
+  color: white;
+  border: 2px solid black;
+  border-radius: 50px;
+}
+
+/*Contact*/
+.contact {
+  background: #111;
+}
+.contact .row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contact .row .content {
+  flex: 1 1 30rem;
+  padding: 4rem;
+  padding-bottom: 0;
+}
+
+.contact .row form {
+  flex: 1 1 45rem;
+  padding: 2rem;
+  margin: 2rem;
+  margin-bottom: 4rem;
+}
+
+.contact .row form .box {
+  padding: 1.5rem;
+  margin: 1rem 0;
+  background: #3333;
+  color: #fff;
+  text-transform: none;
+  font-size: 1.7rem;
+  width: 100%;
+}
+
+.contact .row form .box::placeholder {
+  text-transform: capitalize;
+}
+
+.contact .row form .message {
+  height: 15rem;
+  resize: none;
+}
+
+.contact .row .content .title {
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 3rem;
+  padding-bottom: 2rem;
+}
+
+.contact .row .content .info h3 {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  color: #eee;
+  padding: 1rem 0;
+  font-weight: normal;
+}
+
+.contact .btn {
+  padding: 0.7rem 3rem;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-size: 2rem;
+  border-radius: 5rem;
+  text-align: center;
+}
+
+.btn img {
+  padding: 0 0.5rem;
+  font-size: 1.8rem;
+  margin-right: 5px;
+}
+
+.btn:hover {
+  background: #f9ca24;
+}
+.contact img {
+  width: 30px;
 }
 
 /*Footer*/

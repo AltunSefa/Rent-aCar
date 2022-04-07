@@ -89,6 +89,7 @@ ul {
 
 li {
   margin-left: 27px;
+  margin-right: 20px;
 }
 .dropdown {
   float: left;
@@ -163,6 +164,16 @@ h3 {
   color: #eeeeee;
   font-family: "Hurricane", cursive;
   font-family: "Roboto", sans-serif;
+}
+html::-webkit-scrollbar {
+  width: 1.4rem;
+}
+
+html::-webkit-scrollbar-track {
+  background: #222;
+}
+html::-webkit-scrollbar-thumb {
+  background: #f9ca24;
 }
 /*header finish*/
 

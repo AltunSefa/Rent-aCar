@@ -35,6 +35,16 @@ p {
   outline: none;
   border: none;
 }
+html::-webkit-scrollbar {
+  width: 1.4rem;
+}
+
+html::-webkit-scrollbar-track {
+  background: #222;
+}
+html::-webkit-scrollbar-thumb {
+  background: #f9ca24;
+}
 /*reset kodu bitiş*/
 
 /* header start */
@@ -89,6 +99,7 @@ ul {
 
 li {
   margin-left: 27px;
+  margin-right: 20px;
 }
 .dropdown {
   float: left;
@@ -157,7 +168,7 @@ h1 {
   color: #ffd369;
 }
 
-h3 {
+.header h3 {
   margin-bottom: 25px;
   font-size: 20px;
   color: #eeeeee;
@@ -373,6 +384,7 @@ img {
   color: #fff;
   font-size: 1rem;
   padding: 0.1rem 0;
+  margin-bottom: 10px;
 }
 
 .car-box .price {
