@@ -1,0 +1,295 @@
+@import url("https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Poppins:wght@400;500;600;700;800;900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Hurricane&family=Roboto:wght@100&display=swap");
+
+/*resetleme kodları*/
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+  font-family: "Poppins", sans-serif;
+}
+a,
+a:link,
+a:visited {
+  text-decoration: none;
+  outline: none;
+  border: none;
+}
+
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*reset kodu bitiş*/
+html::-webkit-scrollbar {
+  width: 1.4rem;
+}
+
+html::-webkit-scrollbar-track {
+  background: #222;
+}
+html::-webkit-scrollbar-thumb {
+  background: #f9ca24;
+}
+/* header start */
+
+.container {
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.header {
+  background-image: url(../../images/background.jpg);
+  background-position: center; /* pozisyonu merkeze aldı*/
+  background-size: cover; /* resmin olduğu  divi kaplamasını sağlar*/
+  background-attachment: fixed; /*sabit kalmasını sağladı*/
+  height: 15vh; /*yüksekliğini(vh dedi çünkü her tipe uygun olması için) sayfa boyunca ayarladı*/
+  overflow: hidden;
+}
+.header-navbar {
+  display: flex; /* bu divin içindeki divleri yan yana getirdi*/
+  align-items: center; /* içindeki divleri dikeyde ve yatayda ortaladı*/
+  justify-content: space-between; /*içindeki divlerin arasına boşluk*/
+  padding: 20px 20px;
+}
+
+.header a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.header-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.header-logo-text h2 {
+  color: #ffd369;
+  font-family: "Herr Von Muellerhoff", cursive;
+  font-size: 2rem;
+}
+
+#pnglogo {
+  border-radius: 250px;
+  height: 70px;
+}
+header ul {
+  display: flex;
+}
+
+li {
+  margin-left: 27px;
+  margin-right: 20px;
+}
+header.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+header .dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.header-navbar a:hover,
+.dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+.dropdown-content {
+  display: none;
+  position: fixed;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+.dropdown img {
+  height: 13px;
+  width: 13px;
+  margin-left: 10px;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+h1 {
+  font-size: 8.5rem;
+  font-weight: 100;
+  line-height: 0.4; /*satır boşluğu*/
+  letter-spacing: 2px;
+  font-family: "Herr Von Muellerhoff", cursive;
+  color: #ffd369;
+}
+
+.first-letter {
+  font-size: 10.3rem;
+  font-family: "Herr Von Muellerhoff", cursive;
+  color: #ffd369;
+}
+
+.header h3 {
+  margin-bottom: 25px;
+  font-size: 20px;
+  color: #eeeeee;
+  font-family: "Hurricane", cursive;
+  font-family: "Roboto", sans-serif;
+}
+/*header finish*/
+/*sections*/
+section {
+  background-image: url(../../images/faq.jpg);
+  background-position: center; /* pozisyonu merkeze aldı*/
+  background-size: cover; /* resmin olduğu  divi kaplamasını sağlar*/
+  background-attachment: fixed; /*sabit kalmasını sağladı*/
+  height: 85vh; /*yüksekliğini(vh dedi çünkü her tipe uygun olması için) sayfa boyunca ayarladı*/
+  overflow: hidden;
+}
+section h1 {
+  font-size: 8.5rem;
+  font-weight: 600;
+  line-height: 0.4; /*satır boşluğu*/
+  letter-spacing: 2px;
+  color: black;
+  font-family: inherit;
+  text-decoration: underline;
+}
+.title {
+  font-size: 50px;
+  text-align: center;
+  margin-top: 80px;
+  margin-bottom: 40px;
+  text-decoration: underline 4px;
+}
+.form-group {
+  background-color: rgba(0, 0, 0, 0.575);
+  color: black;
+  max-height: 200px;
+  opacity: 1;
+}
+.questions-container {
+  max-width: 800px;
+  margin: 150px auto;
+}
+
+.question {
+  border-bottom: 1px solid #fff;
+}
+.question img {
+  background-color: #fff;
+  height: 50px;
+  width: 50px;
+  border-radius: 100px;
+  border: 3px solid #fff;
+}
+.question button {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.514);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 15px;
+  border: none;
+  outline: none;
+  font-size: 22px;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+.question .form-group {
+  font-size: 22px;
+  max-height: 0;
+  opacity: 0;
+  line-height: 1.5;
+  overflow: hidden;
+  transition: all 0.6s ease;
+}
+.d-arrow {
+  transition: transform 0.5s ease-in;
+  color: #fff;
+}
+
+/*add this class when click*/
+.question .form-group.show {
+  background-color: rgba(0, 0, 0, 0.575);
+  color: #fff;
+  max-height: 200px;
+  opacity: 1;
+  padding: 0px 15px 30px 15px;
+}
+.question button .d-arrow.rotate {
+  transform: rotate(180deg);
+}
+/*Responsive*/
+/*header*/
+
+@media screen and (max-width: 1160px) {
+  .header li {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+@media screen and (max-width: 980px) {
+  .header {
+    height: 20vh;
+  }
+  .header-navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .header-text h1 {
+    font-size: 50px;
+  }
+  .header-text span {
+    font-size: 60px;
+  }
+  .header-text h3 {
+    font-size: 10px;
+  }
+}
+@media screen and (max-width: 832px) {
+  .header-menu a {
+    font-size: 8px;
+    padding: 9px 11px;
+  }
+  .header li {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .dropdown .dropbtn {
+    font-size: 8px;
+  }
+}
