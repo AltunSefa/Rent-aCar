@@ -184,6 +184,7 @@ h1 {
   background-color: rgba(0, 0, 0, 0.514);
   border-radius: 15px;
 }
+
 .card h3 {
   padding: 30px;
   font-size: 2rem;
@@ -287,5 +288,10 @@ h1 {
   }
   .dropdown .dropbtn {
     font-size: 8px;
+  }
+}
+@media screen and (max-width: 650px) {
+  .card-content img {
+    width: 300px;
   }
 }
