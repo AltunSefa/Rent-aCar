@@ -191,7 +191,6 @@ h3 {
   background-position: center; /* pozisyonu merkeze aldı*/
   background-size: cover; /* resmin olduğu  divi kaplamasını sağlar*/
   background-attachment: fixed; /*sabit kalmasını sağladı*/
-  height: 85vh; /*yüksekliğini(vh dedi çünkü her tipe uygun olması için) sayfa boyunca ayarladı*/
   overflow: hidden;
 }
 .card {
@@ -238,7 +237,7 @@ h3 {
 }
 .card .btn {
   display: block;
-  margin: 40px auto;
+  margin: 10px auto;
   text-align: center;
   background-color: #f9f9f9;
   color: black;
@@ -265,6 +264,7 @@ h3 {
   color: white;
   text-align: center;
   font-size: 18px;
+  margin-bottom: 20px;
   padding: 10px;
 }
 .card a:hover {

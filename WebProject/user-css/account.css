@@ -260,6 +260,22 @@ html::-webkit-scrollbar-thumb {
 .choice .navbar ul li a:hover {
   background: #f9ca24;
 }
+.choice form {
+  display: flex;
+  flex-direction: column;
+}
+.photo {
+  display: block;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  background: #333;
+  color: #fff;
+
+  border-radius: 5rem;
+}
+.photo:hover {
+  background: #f9ca24;
+}
 /*about*/
 .information {
   display: flex;
