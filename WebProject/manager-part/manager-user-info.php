@@ -2,13 +2,16 @@
 include('../conn.php');
 
   $userId=$_GET['userId'];
-  $sql = "SELECT * FROM user_ınfo WHERE UserId='$userId' ";
+  $sql = "SELECT * FROM user_info WHERE userId='$userId' ";
   $result = mysqli_query($con, $sql);
   if (mysqli_num_rows($result) === 1) {
     $row = mysqli_fetch_assoc($result);
+
   }else{
     echo 'hata var';
   }
+
+  
 
 ?>
 
@@ -89,13 +92,57 @@ include('../conn.php');
           </div>
           <div class="comment-box">
             <img src="../images/person-1.png" alt="" id="comment-photo" />
-            <h3>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas,
-              ut.
+            <h3><?php echo  $row['eMail'] ?></h3>
+            <?php
+               $email=$row['eMail'];
+               $descs=mysqli_query($con,"SELECT * FROM userdescription inner join user_info on userdescription.eMail = user_info.eMail and userdescription.eMail='$email'  ;  ");
+               while($userdsc=mysqli_fetch_assoc($descs)){
+                $yorum[]= $userdsc['dsc'];
+                $tarih[]= $userdsc['dateD'];
+                $tmpconst=count($yorum)-1;
+              }
+               
+               
+                
+            ?>
+            <h3 id="dscH">
+             <?php echo $yorum[$tmpconst];?>
             </h3>
+            <h3 id="dscT">
+             <?php echo $tarih[$tmpconst];?>
+            </h3>
+            
+            
           </div>
         </div>
       </div>
     </section>
   </body>
 </html>
+<script>
+  let yorums= <?= json_encode($yorum); ?>;
+  let tarihs= <?= json_encode($tarih); ?>;
+ 
+  let constant =  yorums.length;
+  
+  setInterval(function(){
+    constant = constant-1;
+    
+  
+    let text = yorums[constant];
+    let textT = tarihs[constant];
+   
+
+    document.getElementById('dscH').innerHTML=text;
+    document.getElementById('dscT').innerHTML=textT;
+    
+    if(constant==0){
+      constant=yorums.length;
+      
+    }
+  
+    ;},1000);
+ 
+
+</script>
+

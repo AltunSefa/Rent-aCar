@@ -5,7 +5,7 @@
 $host = "localhost";
 $email = "root";
 $password = "mysql123";
-$database = "rent_a_Car";
+$database = "rent_a_car";
 
 $con = mysqli_connect($host, $email, $password, $database);
 

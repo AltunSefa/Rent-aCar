@@ -2,9 +2,9 @@
 include "conn.php";
 session_start();
 $email=$_SESSION['email'];
-$result=mysqli_query($con,"SELECT * FROM user_ınfo Where eMail = '$email' ");
+$result=mysqli_query($con,"SELECT * FROM user_info Where eMail = '$email' ");
   $row = mysqli_fetch_assoc($result);
-  $id=$row['UserId'];
+  $id=$row['userId'];
 
 if ($_POST) {
 
@@ -28,7 +28,7 @@ if ($_POST) {
 				$new_img_name = uniqid("IMG-", true).'.'.$img_extension_lower;
 				$img_upload_path = 'images/'.$new_img_name;
 				move_uploaded_file($tmp_name, $img_upload_path);
-				$sql = "UPDATE user_ınfo SET userImg='$new_img_name' WHERE UserId=$id";
+				$sql = "UPDATE user_info SET userImg='$new_img_name' WHERE UserId=$id";
 				if ($con->query($sql) === TRUE) {
 					
 					echo  "<script> alert('you load');</script>";

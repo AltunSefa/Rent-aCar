@@ -217,6 +217,9 @@ html::-webkit-scrollbar-thumb {
   text-align: center;
   padding-bottom: 90px;
 }
+.choice .user {
+  margin-top: 70px;
+}
 
 .choice .user img {
   height: 17rem;
@@ -230,6 +233,10 @@ html::-webkit-scrollbar-thumb {
 
 .choice .user .name {
   font-size: 3.5rem;
+  color: #fff;
+}
+.choice .user .email {
+  font-size: 2.5rem;
   color: #fff;
 }
 
@@ -545,7 +552,7 @@ html::-webkit-scrollbar-thumb {
 }
 
 .contact .row form .message {
-  height: 15rem;
+  margin-top: 50px;
   resize: none;
 }
 

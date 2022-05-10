@@ -150,7 +150,7 @@ if(isset($_POST['login'])){
   $password=$_POST['password'];
   $password=md5($password);
 
-  $sql = "SELECT * FROM user_ınfo WHERE eMail='$email' ";
+  $sql = "SELECT * FROM user_info WHERE eMail='$email' ";
 
   $result = mysqli_query($con, $sql);
 

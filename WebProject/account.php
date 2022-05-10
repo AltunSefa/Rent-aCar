@@ -3,7 +3,7 @@ session_start();
 include('conn.php');
 if(!empty($_SESSION["email"])){
   $email = $_SESSION["email"];
-  $result=mysqli_query($con,"SELECT * FROM user_ınfo Where eMail = '$email' ");
+  $result=mysqli_query($con,"SELECT * FROM user_info Where eMail = '$email' ");
   $row = mysqli_fetch_assoc($result);
 }else{
   header('location: login.php');
@@ -83,6 +83,7 @@ if(!empty($_SESSION["email"])){
           echo'user.png';
         } ?>" alt="" id="user_img"/>
         <h3 class="name"><?php echo  $row['userName'] ?></h3>
+        <h4 class="email"><?php echo  $row['eMail'] ?></h4>
         <form action="upload.php"
            method="post"
            enctype="multipart/form-data">
@@ -144,15 +145,11 @@ if(!empty($_SESSION["email"])){
         } ?>" />
           </div>
           <div class="form-group">
-            <label for="name">email</label>
-            <input type="text" name="email"required value="<?php echo  $row['eMail'] ?>" />
-          </div>
-          <div class="form-group">
             <label for="name">Phone</label>
             <input type="text" name="phone" required value="<?php echo  $row['phoneNumber'] ?>"/>
           </div>
 
-          <button class="btn" type="submit" name='aboutMe'>Save Change</button>
+          <button class="btn" type="submit" name='aboutMeBtn'>Save Change</button>
           </form>
         </div>
       </div>
@@ -165,19 +162,21 @@ if(!empty($_SESSION["email"])){
       <h3 class="heading"><span>Change</span> Password</h3>
       <div class="row">
         <div class="password-info">
+          <form action="account.php" method="post">
           <div class="form-group">
             <label for="name">Old Password</label>
-            <input type="password" required />
+            <input type="password" required name='oldPassword'/>
           </div>
           <div class="form-group">
             <label for="name">New Password</label>
-            <input type="password" required />
+            <input type="password" required name='newPassword'/>
           </div>
           <div class="form-group">
-            <label for="name">New Password</label>
-            <input type="password" required />
+            <label for="name">Confirm Password</label>
+            <input type="password" required name='newPassword2' />
           </div>
-          <button class="btn" type="submit">Save Change</button>
+          <button class="btn" type="submit" name='passwordBtn'>Save Change</button>
+          </form>
         </div>
       </div>
     </section>
@@ -186,7 +185,7 @@ if(!empty($_SESSION["email"])){
     <!-- Start My Rentals -->
 
     <section class="my-rentals" id="my-rentals">
-      <h3 class="heading">my <span>Rentals</span></h3>
+      <h3 class="heading">my <span> Old Rentals</span></h3>
 
       <div class="car-menu-container">
         <div class="car-box">
@@ -208,6 +207,7 @@ if(!empty($_SESSION["email"])){
           <a href="#" class="btn">Booking Again</a>
         </div>
       </div>
+
     </section>
     <!-- Finish My Rentals -->
 
@@ -227,19 +227,18 @@ if(!empty($_SESSION["email"])){
           </div>
         </div>
 
-        <form action="">
-          <input type="text" placeholder="name" class="box" />
-          <input type="email" placeholder="email" class="box" />
-          <input type="text" placeholder="project" class="box" />
+        <form action="account.php" method="post">
+          
+        
           <textarea
-            name=""
+            name="dsc"
             id=""
             cols="30"
             rows="10"
             class="box message"
             placeholder="message"
           ></textarea>
-          <button type="submit" class="btn">
+          <button type="submit" class="btn" name="sendBtn">
             send <img src="images/send.png" alt="" />
           </button>
         </form>
@@ -305,68 +304,118 @@ if(!empty($_SESSION["email"])){
 <?php 
 
 
-if(isset($_POST['aboutMe'])){
-  $userId=$row['UserId'];
+if(isset($_POST['aboutMeBtn'])){
+  $userId=$row['userId'];
   $newName=$_POST['name'];
   $username=$row['userName'];
   if($newName===$username){
 
   }else{
-    $sql = "UPDATE user_ınfo SET userName='$newName' WHERE UserId=$userId";
+    $sql = "UPDATE user_info SET userName='$newName' WHERE userId=$userId";
     if ($con->query($sql) === TRUE) {
 					
     } else {
       echo "<script> alert('you could not change username') </script>";
     }
       
-    $con->close();
+  
   }
   $newAge=$_POST['age'];
   $age=$row['age'];
   if($newAge===$age){
 
   }else{
-    $sql = "UPDATE user_ınfo SET age='$newAge' WHERE UserId=$userId";
+    $sql = "UPDATE user_info SET age='$newAge' WHERE userId=$userId";
     if ($con->query($sql) === TRUE) {
 					
     } else {
       echo "<script> alert('you could not change your age') </script>";
     }
       
-    $con->close();
+    
   }
   $newGender=$_POST['gender'];
   $gender=$row['gender'];
   if($newGender===$gender){
 
   }else{
-    $sql = "UPDATE user_ınfo SET gender='$newGender' WHERE UserId=$userId";
+    $sql = "UPDATE user_info SET gender='$newGender' WHERE userId=$userId";
     if ($con->query($sql) === TRUE) {
 					
     } else {
       echo "<script> alert('you could not change your age') </script>";
     }
       
-    $con->close();
+    
   }
-  $newEmail=$_POST['email'];
-  $email=$row['Email'];
-  if($newEmail===$email){
+  $newPhone=$_POST['phone'];
+  $phone=$row['phoneNumber'];
+  if($newPhone===$phone){
 
   }else{
-    $sql = "UPDATE user_ınfo SET eMail='$newEmail' WHERE UserId=$userId";
+    $sql = "UPDATE user_ınfo SET eMail='$newPhone' WHERE userId=$userId";
     if ($con->query($sql) === TRUE) {
 					
     } else {
-      echo "<script> alert('you could not change your age') </script>";
+      echo "<script> alert('you could not change your Phone') </script>";
     }
       
     $con->close();
   }
 
-
-  header('location:account.php');
+  
+  echo "<script type='text/javascript'>window.location.href='account.php';</script>";
 }    
+
+if(isset($_POST['passwordBtn'])){
+  $oldPassword=$_POST['oldPassword'];
+  $oldPassword=md5($oldPassword);
+  $newPassword=$_POST['newPassword'];
+  $newPassword2=$_POST['newPassword2'];
+  if($oldPassword===$row['password']){
+    
+    if( $newPassword=== $newPassword2){
+      $userId=$row['userId'];
+      $newPassword=md5($newPassword);
+      $sql = "UPDATE user_info SET password='$newPassword' WHERE UserId=$userId";
+      if ($con->query($sql) === TRUE) {
+        echo "<script> alert('you change your Phone') </script>";
+      } else {
+        echo "<script> alert('you could not change your password') </script>";
+      }
+        
+      $con->close();
+
+
+    }else{
+      echo "<script> alert('Confirm Password is not same New password') </script>";
+      
+    }
+
+  }else{
+    echo "<script> alert('Please enter true old password') </script>";
+  }
+
+}
+if(isset($_POST['sendBtn'])){
+  if($_POST['dsc']){
+    $date = date("Y-m-d");
+    $userMail=$row['eMail'];
+    $userDsc=$_POST['dsc'];
+    $sql = "INSERT INTO `userdescription` (dsc, eMail,`dateD`)
+    VALUES ( '$userDsc','$userMail','$date')";
+    if ($con->query($sql) === TRUE) {
+      echo "<script> alert('you sen your message') </script>";
+    } else {
+      echo "<script> alert('you could not sen your mesaage') </script>";
+    }
+
+
+  }
+  
+
+  
+}
 
 ?>
 

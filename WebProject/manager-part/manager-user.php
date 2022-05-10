@@ -1,6 +1,6 @@
 <?php 
 include('../conn.php');
-$result = mysqli_query($con,"SELECT * FROM user_ınfo");
+$result = mysqli_query($con,"SELECT * FROM user_info");
 session_start();
 
 ?>
@@ -67,7 +67,7 @@ session_start();
             <a href="#" class="title"><?php echo $user['userName'] ?></a>
             <form action="manager-user.php" method="post">
             <button class="btn" id="btn" type="submit" name='showBtn'>
-            <a href="manager-user-info.php?userId=<?php echo $user['UserId'] ?>">Show İnfo</a>
+            <a href="manager-user-info.php?userId=<?php echo $user['userId'] ?>">Show İnfo</a>
             </button>
             </form>
             

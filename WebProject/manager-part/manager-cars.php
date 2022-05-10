@@ -1,3 +1,7 @@
+<?php 
+ include('../conn.php');
+ $result=mysqli_query($con,"SELECT * FROM car_info ");
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,107 +45,38 @@
       <h1 class="car-type-heading">Cars</h1>
 
       <div class="car-menu-container">
+      <?php 
+          while($car=mysqli_fetch_assoc($result)){
+            
+              
+           
+          
+        ?>
         <div class="car-box">
-          <img src="../images/car-rent-1.png" alt="" />
-          <h2>A</h2>
-          <h3>Sedan</h3>
-          <h5>Economic Car</h5>
-          <div class="price">$15.99</div>
-          <a href="manager-edit.php" class="btn">Edit</a>
-        </div>
+          <img src="../images/<?php echo $car['carImg'] ?>" alt="" />
+          <h2><?php echo $car['carName'] ?></h2>
+          <h3><?php 
+          $carsType=$car['carTypeId'];
+          $resultT=mysqli_query($con,"SELECT * FROM carType where typeId='$carsType'"); 
+          $rowT = mysqli_fetch_assoc($resultT);
+          echo $rowT['type'];
 
-        <div class="car-box">
-          <img src="../images/car-rent-2.png" alt="" />
-          <h2>B</h2>
-          <h3>Sedan</h3>
-          <h5>Comfort Car</h5>
-          <div class="price">$15.99</div>
-          <a href="manager-edit.php" class="btn">Edit</a>
-        </div>
+          ?></h3>
+          <h5><?php 
+          $carsSegment=$car['carSegmentId'];
+          $resultS=mysqli_query($con,"SELECT * FROM carSegment where segmentId='$carsSegment'"); 
+          $rowS = mysqli_fetch_assoc($resultS);
+          echo $rowS['segment'];
 
-        <div class="car-box">
-          <img src="../images/car-rent-3.png" alt="" />
-          <h2>C</h2>
-          <h3>Hatchback</h3>
-          <h5>Prestige Car</h5>
-          <div class="price">$15.99 ></div>
-          <a href="manager-edit.php" class="btn">Edit</a>
+          ?></h5>
+          <div class="price">$<?php echo $car['price'] ?></div>
+          <a href="manager-edit.php?carId=<?php echo $car['carId'] ?>" class="btn">Edit</a>
         </div>
+        <?php } 
 
-        <div class="car-box">
-          <img src="../images/car-rent-4.png" alt="" />
-          <h2>D</h2>
-          <h3>Hatchback</h3>
-          <h5>Premium Car</h5>
-          <div class="price">$15.99</div>
-          <a href="manager-edit.php" class="btn">Edit</a>
-        </div>
+          
+        ?>
 
-        <div class="car-box">
-          <img src="../images/car-rent-5.png" alt="" />
-          <h2>E</h2>
-          <h3>Sport</h3>
-          <h5>Luxury Car</h5>
-          <div class="price">$15.99</div>
-          <a href="manager-edit.php" class="btn">Edit</a>
-        </div>
-
-        <div class="car-box">
-          <img src="../images/car-rent-6.png" alt="" />
-          <h2>F</h2>
-          <h3>Sport</h3>
-          <h5>Premium Car</h5>
-          <div class="price">$15.99</div>
-          <a href="manager-edit.php" class="btn">Edit</a>
-        </div>
-        <div class="car-box">
-          <img src="../images/car-1.png" alt="" />
-          <h2>G</h2>
-          <h3>SUV</h3>
-          <h5>Economic Car</h5>
-          <div class="price">$15.99</div>
-          <a href="manager-edit.php" class="btn">Edit</a>
-        </div>
-        <div class="car-box">
-          <img src="../images/car-2.png" alt="" />
-          <h2>K</h2>
-          <h3>SUV</h3>
-          <h5>Luxury Car</h5>
-          <div class="price">$15.99</div>
-          <a href="manager-edit.php" class="btn">Edit</a>
-        </div>
-        <div class="car-box">
-          <img src="../images/car-3.png" alt="" />
-          <h2>L</h2>
-          <h3>Caravan</h3>
-          <h5>Comfort Car</h5>
-          <div class="price">$15.99</div>
-          <a href="manager-edit.php" class="btn">Edit</a>
-        </div>
-        <div class="car-box">
-          <img src="../images/car-4.png" alt="" />
-          <h2>M</h2>
-          <h3>Caravan</h3>
-          <h5>Prestige Car</h5>
-          <div class="price">$15.99</div>
-          <a href="manager-edit.php" class="btn">Edit</a>
-        </div>
-        <div class="car-box">
-          <img src="../images/car-5.png" alt="" />
-          <h2>N</h2>
-          <h3>Pick up</h3>
-          <h5>Luxury Car</h5>
-          <div class="price">$15.99</div>
-          <a href="manager-edit.php" class="btn">Edit</a>
-        </div>
-        <div class="car-box">
-          <img src="../images/car-6.png" alt="" />
-          <h2>O</h2>
-          <h3>Pick up</h3>
-          <h5>Comfort Car</h5>
-          <div class="price">$15.99</div>
-          <a href="manager-edit.php" class="btn">Edit</a>
-        </div>
       </div>
     </section>
   </body>

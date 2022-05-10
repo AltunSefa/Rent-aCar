@@ -168,7 +168,7 @@ h1 {
 }
 /*header finish*/
 /*users*/
-.users {
+body {
   background-color: black;
 }
 .user-heading {
@@ -184,10 +184,11 @@ h1 {
 }
 .box-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 0.4fr));
   gap: 1.5rem;
   background-color: black;
   padding: 30px 200px;
+  justify-content: center;
 }
 
 .box {

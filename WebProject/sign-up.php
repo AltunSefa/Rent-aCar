@@ -169,7 +169,7 @@ if(isset($_POST["username"],$_POST["email"],$_POST["phoneNumber"],$_POST["passwo
     
     $password=md5($password);
 
-    $sql = "INSERT INTO user_ınfo (userName, eMail, phoneNumber,`password`,`date`)
+    $sql = "INSERT INTO user_info (userName, eMail, phoneNumber,`password`,`date`)
     VALUES ('$username', '$email','$phoneNumber','$password','$date')";
 
 
