@@ -332,7 +332,7 @@
 
           ?></h5>
           <div class="price">$<?php echo $car['price'] ?></div>
-          <a href="booking.php" class="btn">Booking</a>
+          <a href="booking.php?carId=<?php echo$car['carId'] ?>" class="btn">Booking</a>
         </div>
         <?php } 
 

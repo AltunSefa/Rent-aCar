@@ -96,20 +96,34 @@ include('../conn.php');
             <?php
                $email=$row['eMail'];
                $descs=mysqli_query($con,"SELECT * FROM userdescription inner join user_info on userdescription.eMail = user_info.eMail and userdescription.eMail='$email'  ;  ");
-               while($userdsc=mysqli_fetch_assoc($descs)){
-                $yorum[]= $userdsc['dsc'];
-                $tarih[]= $userdsc['dateD'];
-                $tmpconst=count($yorum)-1;
-              }
+               
+               if(mysqli_num_rows($descs) === 0){
+                 $yorum=array("yorum yok");
+                 $tarih=array("../../..");
+                 $tmpconst=count($yorum)-1;
+               }else{
+                while($userdsc=mysqli_fetch_assoc($descs)){
+                  $yorum[]= $userdsc['dsc'];
+                  $tarih[]= $userdsc['dateD'];
+                  $tmpconst=count($yorum)-1;
+                }
+                 
+
+               }
+               
                
                
                 
             ?>
             <h3 id="dscH">
-             <?php echo $yorum[$tmpconst];?>
+             <?php 
+               echo $yorum[$tmpconst];
+                ?>
             </h3>
             <h3 id="dscT">
-             <?php echo $tarih[$tmpconst];?>
+             <?php 
+               echo $tarih[$tmpconst];
+               ?>
             </h3>
             
             

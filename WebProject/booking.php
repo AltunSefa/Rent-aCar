@@ -1,3 +1,11 @@
+<?php 
+include('conn.php');
+$carId=$_GET['carId'];
+$result=mysqli_query($con,"SELECT * FROM car_info where carId=$carId ");
+$car=mysqli_fetch_assoc($result);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -64,40 +72,65 @@
     <div class="detail">
       <div class="detail-container anime-top">
         <div class="content">
-          <h1 class="carname">A</h1>
+          <h1 class="carname"><?php echo $car['carName'] ?></h1>
 
           <div class="detail-row">
             <div class="car-photo">
-              <img src="images/car-rent-1.png" alt="" />
+              <img src="images/<?php echo $car['carImg'] ?>" alt="" />
             </div>
 
             <div class="car-desc">
-              <h4 class="pri">$99.00/Day</h4>
+              <h4 class="pri">$<?php echo $car['price']; ?>/Day</h4>
 
               <div class="car-p">
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-                  numquam deleniti, voluptates excepturi similique sint
-                  accusamus earum fuga minima, animi possimus iste ipsa ipsam
-                  eum architecto quaerat quia velit officiis!
+                  <?php echo $car['carDsc'] ?>
                 </p>
               </div>
               <div class="car-warning">
                 <div class="warning-cars">
                   <img src="images/driver-license.png" alt="" />
-                  <h5>Lorem.</h5>
+                  <h5><?php 
+                  $lisenceId=$car['lisenceId'];
+                  $resultLicence=mysqli_query($con,"SELECT * FROM  carlisence where lisenceId=$lisenceId ");
+                  $licence=mysqli_fetch_assoc($resultLicence);
+                  echo $licence['lisence'];
+
+                  
+                  ?></h5>
                 </div>
                 <div class="warning-cars">
                   <img src="images/gear-shift.png" alt="" />
-                  <h5>Lorem.</h5>
+                  <h5><?php 
+                  $gearId=$car['gearId'];
+                  $resultGear=mysqli_query($con,"SELECT * FROM  cargear where gearId=$gearId ");
+                  $gear=mysqli_fetch_assoc($resultGear);
+                  echo $gear['gear'];
+
+                  
+                  ?></h5>
                 </div>
                 <div class="warning-cars">
                   <img src="images/gas-station.png" alt="" />
-                  <h5>Lorem.</h5>
+                  <h5><?php 
+                  $fuelId=$car['fuelId'];
+                  $resultFuel=mysqli_query($con,"SELECT * FROM  carfuel where fuelId=$gearId ");
+                  $fuel=mysqli_fetch_assoc($resultFuel);
+                  echo $fuel['fuel'];
+
+                  
+                  ?></h5>
                 </div>
                 <div class="warning-cars">
                   <img src="images/group.png" alt="" />
-                  <h5>Lorem.</h5>
+                  <h5><?php 
+                  $passengerId=$car['passengerId'];
+                  $resultPassenger=mysqli_query($con,"SELECT * FROM  carpassenger where passengerId=$passengerId ");
+                  $passenger=mysqli_fetch_assoc($resultPassenger);
+                  echo $passenger['passenger'];
+
+                  
+                  ?></h5>
                 </div>
               </div>
             </div>

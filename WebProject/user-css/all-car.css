@@ -355,9 +355,11 @@ img {
 }
 .car-menu-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 0.4fr));
   gap: 1.5rem;
-  padding: 50px 200px;
+  background-color: black;
+  padding: 30px 200px;
+  justify-content: center;
 }
 
 .car-box {

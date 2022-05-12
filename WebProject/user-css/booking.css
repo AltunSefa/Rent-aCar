@@ -186,6 +186,9 @@ h3 {
   height: 100%; /*yüksekliğini(vh dedi çünkü her tipe uygun olması için) sayfa boyunca ayarladı*/
   overflow: hidden;
 }
+.carname {
+  margin-bottom: 35px;
+}
 
 .detail-container {
   display: flex;
@@ -202,14 +205,24 @@ h3 {
   display: flex;
   align-items: center;
   border-top: 3px solid white;
+  margin: 10px 0;
+}
+.car-photo {
+  margin-top: 20px;
 }
 
 .car-warning {
   display: flex;
   margin-top: 20px;
-
   justify-content: space-around;
 }
+.car-warning .warning-cars {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 20px;
+}
+
 .warning-cars img {
   height: 40px;
   width: 40px;
@@ -221,6 +234,10 @@ h3 {
 
 .car-desc h4 {
   color: white;
+}
+.car-p {
+  word-break: break-word;
+  table-layout: fixed;
 }
 
 .car-p p {

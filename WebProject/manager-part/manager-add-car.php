@@ -2,6 +2,10 @@
   include('../conn.php');
   $result=mysqli_query($con,"SELECT * FROM carsegment ");
   $result2=mysqli_query($con,"SELECT * FROM cartype ");
+  $result3=mysqli_query($con,"SELECT * FROM carlisence ");
+  $result4=mysqli_query($con,"SELECT * FROM cargear ");
+  $result5=mysqli_query($con,"SELECT * FROM carfuel ");
+  $result6=mysqli_query($con,"SELECT * FROM carpassenger ");
 
   
   
@@ -103,32 +107,34 @@
             <div class="form-group">
               <select name="licence" required >
                 <option value="" disabled selected>Car Licence</option>
-                <option value="b">b</option>
-                <option value="c">c</option>
-                <option value="d">d</option>
+                <?php while($lisence=mysqli_fetch_assoc($result3)){ ?>
+                <option value="<?php echo $lisence['lisence'] ?>"><?php echo $lisence['lisence'] ?></option>
+                <?php } ?>
                 
               </select>
             </div>
             <div class="form-group">
               <select name="gear" required>
                 <option value="" disabled selected>Car Gear</option>
-                <option value="Manuel">Manuel</option>
-                <option value="Automatic">Automatic</option>
+                <?php while($gear=mysqli_fetch_assoc($result4)){ ?>
+                <option value="<?php echo $gear['gear'] ?>"><?php echo $gear['gear'] ?></option>
+                <?php } ?>
               </select>
             </div>
             <div class="form-group">
               <select name="fuel" required>
                 <option value="" disabled selected>Car Fuel</option>
-                <option value="gasoline">gasoline</option>
-                <option value="diesel">diesel</option>
+                <?php while($fuel=mysqli_fetch_assoc($result5)){ ?>
+                <option value="<?php echo $fuel['fuel'] ?>"><?php echo $fuel['fuel'] ?></option>
+                <?php } ?>
               </select>
             </div>
             <div class="form-group">
               <select name="passenger" required >
               <option value="" disabled selected>Number of Passenger</option>
-                <option value="1-2">1-2</option>
-                <option value="1-4">1-4</option>
-                <option value="1-8">1-8</option>
+              <?php while($passenger=mysqli_fetch_assoc($result6)){ ?>
+                <option value="<?php echo $passenger['passenger'] ?>"><?php echo $passenger['passenger'] ?></option>
+                <?php } ?>
               </select>
             </div>
 
@@ -180,26 +186,51 @@
     
   
     $result1=mysqli_query($con,"SELECT * FROM carsegment where segment='$carSegment' ");
-    $carSegmentId=0;
+    
     if (mysqli_num_rows($result1) === 1) {
       $row = mysqli_fetch_assoc($result1);
       $carSegmentId=$row['segmentId'];
     }
   
     $result21=mysqli_query($con,"SELECT * FROM cartype where `type`='$carType' ");
-    $carTypeId=0;
+
     if (mysqli_num_rows($result21) === 1) {
       $row = mysqli_fetch_assoc($result21);
       $carTypeId=$row['typeId'];
     }
 
+    $result31=mysqli_query($con,"SELECT * FROM carlisence where `lisence`='$carLicence' ");
+   
+    if (mysqli_num_rows($result31) === 1) {
+      $row = mysqli_fetch_assoc($result31);
+      $carLisenceId=$row['lisenceId'];
+    }
 
-    
-  
-    
+    $result41=mysqli_query($con,"SELECT * FROM cargear where `gear`='$carGear' ");
+   
+    if (mysqli_num_rows($result41) === 1) {
+      $row = mysqli_fetch_assoc($result41);
+      $carGearId=$row['gearId'];
+    }
+
+    $result51=mysqli_query($con,"SELECT * FROM carfuel where `fuel`='$carFuel' ");
+   
+    if (mysqli_num_rows($result51) === 1) {
+      $row = mysqli_fetch_assoc($result51);
+      $carFuelId=$row['fuelId'];
+    }
+
+    $result61=mysqli_query($con,"SELECT * FROM carpassenger where `passenger`='$carPassenger' ");
+   
+    if (mysqli_num_rows($result61) === 1) {
+      $row = mysqli_fetch_assoc($result61);
+      $carPassengerId=$row['passengerId'];
+    }
+
+
       
-    $sql = "INSERT INTO `car_info` (carName, carBrand,carYear,carSegmentId,carTypeId,price,carDsc,carDsc1,carDsc2,carDsc3,carDsc4,carImg,carStatus) 
-    VALUES ( '$carName','$carBrand','$carYear','$carSegmentId','$carTypeId','$carPrice','$carDsc','$carLicence','$carGear','$carFuel','$carPassenger','$new_img_name','$carStatus')";
+    $sql = "INSERT INTO `car_info` (carName, carBrand,carYear,carSegmentId,carTypeId,price,carDsc,lisenceId,gearId,fuelId,passengerId,carImg,carStatus) 
+    VALUES ( '$carName','$carBrand','$carYear','$carSegmentId','$carTypeId','$carPrice','$carDsc','$carLisenceId','$carGearId','$carFuelId','$carPassengerId','$new_img_name','$carStatus')";
 
     if ($con->query($sql) === TRUE) {
         echo  "<script> alert('you load');</script>";
@@ -216,8 +247,6 @@
 
 	} 
   
-  }else{
-    echo 'olmuyo';
   }
 
 ?>
