@@ -1,11 +1,19 @@
 <?php 
+  
+  session_start();
   include('../conn.php');
+  if(!empty($_SESSION["email"])){
+
+  }else{
+    echo "<script type='text/javascript'>window.location.href='manager-login.php';</script>";
+  }
   $result=mysqli_query($con,"SELECT * FROM carsegment ");
   $result2=mysqli_query($con,"SELECT * FROM cartype ");
   $result3=mysqli_query($con,"SELECT * FROM carlisence ");
   $result4=mysqli_query($con,"SELECT * FROM cargear ");
   $result5=mysqli_query($con,"SELECT * FROM carfuel ");
   $result6=mysqli_query($con,"SELECT * FROM carpassenger ");
+  $result7=mysqli_query($con,"SELECT * FROM carbranch ");
 
   
   
@@ -34,7 +42,7 @@
               <ul>
                 <li><a href="manager.php">Home</a></li>
                 <li><a href="manager-cars.php">Cars</a></li>
-
+                <li><a href="manager-bookings.php">Bookings</a></li>
                 <li><a href="manager-add-car.php">Add Car</a></li>
                 <li><a href="manager-user.php">Users</a></li>
                 <li><a href="manager-faq.php">Edit Faqs</a></li>
@@ -105,6 +113,14 @@
               ></textarea>
             </div>
             <div class="form-group">
+              <select name="branch" required>
+                <option value="" disabled selected>Select Branch</option>
+                <?php while($branch=mysqli_fetch_assoc($result7)){ ?>
+                <option value="<?php echo $branch['branch'] ?>"><?php echo $branch['branch'] ?></option>
+                <?php } ?>
+              </select>
+            </div>
+            <div class="form-group">
               <select name="licence" required >
                 <option value="" disabled selected>Car Licence</option>
                 <?php while($lisence=mysqli_fetch_assoc($result3)){ ?>
@@ -121,6 +137,7 @@
                 <?php } ?>
               </select>
             </div>
+            
             <div class="form-group">
               <select name="fuel" required>
                 <option value="" disabled selected>Car Fuel</option>
@@ -178,11 +195,12 @@
     $carType=$_POST['type'];
     $carPrice=$_POST['car-price'];
     $carDsc=$_POST['cardsc'];
+    $carBranch=$_POST['branch'];
     $carLicence=$_POST['licence'];
     $carGear=$_POST['gear'];
     $carFuel=$_POST['fuel'];
     $carPassenger=$_POST['passenger'];
-    $carStatus=0;
+    
     
   
     $result1=mysqli_query($con,"SELECT * FROM carsegment where segment='$carSegment' ");
@@ -198,6 +216,14 @@
       $row = mysqli_fetch_assoc($result21);
       $carTypeId=$row['typeId'];
     }
+
+    $result71=mysqli_query($con,"SELECT * FROM carbranch where `branch`='$carBranch' ");
+   
+    if (mysqli_num_rows($result71) === 1) {
+      $row = mysqli_fetch_assoc($result71);
+      $carBranchId=$row['branchdId'];
+    }
+
 
     $result31=mysqli_query($con,"SELECT * FROM carlisence where `lisence`='$carLicence' ");
    
@@ -229,8 +255,8 @@
 
 
       
-    $sql = "INSERT INTO `car_info` (carName, carBrand,carYear,carSegmentId,carTypeId,price,carDsc,lisenceId,gearId,fuelId,passengerId,carImg,carStatus) 
-    VALUES ( '$carName','$carBrand','$carYear','$carSegmentId','$carTypeId','$carPrice','$carDsc','$carLisenceId','$carGearId','$carFuelId','$carPassengerId','$new_img_name','$carStatus')";
+    $sql = "INSERT INTO `car_info` (carName, carBrand,carYear,carSegmentId,carTypeId,price,carDsc,branchdId,lisenceId,gearId,fuelId,passengerId,carImg) 
+    VALUES ( '$carName','$carBrand','$carYear','$carSegmentId','$carTypeId','$carPrice','$carDsc','$carBranchId','$carLisenceId','$carGearId','$carFuelId','$carPassengerId','$new_img_name')";
 
     if ($con->query($sql) === TRUE) {
         echo  "<script> alert('you load');</script>";

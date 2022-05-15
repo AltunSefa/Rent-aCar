@@ -8,4 +8,4 @@ CREATE TABLE `payment` (
    `ccv` int NOT NULL,
   PRIMARY KEY (`paymentId`),
   foreign key (userId) References user_info (userId)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci

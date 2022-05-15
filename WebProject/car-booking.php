@@ -1,3 +1,14 @@
+<?php 
+ session_start();
+ include('conn.php');
+
+ 
+
+ 
+ $result=mysqli_query($con,"SELECT * FROM car_info ");
+ $branchs=mysqli_query($con,"SELECT * FROM carbranch ");
+ 
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,17 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="user-css/faqs.css" />
-    <!-- fontawasome cdn -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-    />
-    <!-- google font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="user-css/car-booking.css" />
   </head>
   <body>
     <!-- Header start -->
@@ -32,7 +33,7 @@
             <div class="header-menu">
               <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="car-booking.php">Booking Car</a></li>
+                <li><a href="#">Booking Car</a></li>
                 <li><a href="account.php#contact">Contact</a></li>
                 <li>
                   <div class="dropdown">
@@ -69,53 +70,91 @@
         </div>
       </div>
     </header>
+    <!-- header finish -->
+    <section class="car-menu" id="car-menu">
+      <h1 class="car-type-heading">Cars</h1>
 
-    <!-- Header Finish -->
-    <section>
-      <h1 class="title">FAQ's</h1>
+      <div class="selectCar">
 
-      <div class="questions-container">
-        <div class="question">
-          <button>
-            <span>Lorem ipsum dolor sit amet?</span>
-            <img src="images/up-arrow.png" alt="" class="d-arrow" />
-          </button>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam culpa consequuntur sint! Animi, non maiores!
-          </p>
+        <form action="" method="post">
+          <select name="SelectBranch" required class="select">
+          <option value="" disabled selected>Select branch</option>
+          <?php 
+          
+            while($branch=mysqli_fetch_assoc($branchs)){
+          ?>
+      
+          <option value="<?php echo $branch['branch'];?>"><?php echo $branch['branch'];?></option>
+          <?php } ?>
+          <input type="date" class="select" name="purchaseDate" required min="<?php echo date("Y-m-d");?> " />
+          <input type="date"class="select" name="returnDate" required min="<?php echo date("Y-m-d");?>" />
+      
+          <button type="submit" class="btn" name="show">show</button>
+
+        </form>
+      
+      </div>
+
+      <div class="car-menu-container">
+        
+        <?php 
+    
+    if(isset($_POST['show'])){
+      $_SESSION['SelectBranch']=$_POST['SelectBranch'];
+      $_SESSION['purchaseDate']=$_POST['purchaseDate'];
+      $_SESSION['returnDate']=$_POST['returnDate'];
+      $branchName=$_POST['SelectBranch'];
+      $purchaseDate=$_POST['purchaseDate'];
+      $returnDate=$_POST['returnDate'];
+
+      $invalidCar=mysqli_query($con,"SELECT * FROM car_info c inner join carbranch cb on cb.branchdId=c.branchdId  WHERE c.carId not in (SELECT cc.carId FROM  booking cc  inner join car_info  on car_info.carId = cc.carId AND  '$purchaseDate' BETWEEN cc.purchaseDate AND cc.returnDate
+      OR '$returnDate' BETWEEN cc.purchaseDate AND cc.returnDate or purchaseDate > '$purchaseDate' and returnDate < '$returnDate') AND cb.branch LIKE '%".$branchName."%' ");
+      
+        
+
+        while($car=mysqli_fetch_assoc($invalidCar)){
+          
+          
+    
+         
+        ?>
+        <div class="car-box">
+          <img src="images/<?php echo $car['carImg'] ?>" alt="" />
+          <h2><?php echo $car['carName'] ?></h2>
+          <h3><?php 
+          $carsType=$car['carTypeId'];
+          $resultT=mysqli_query($con,"SELECT * FROM carType where typeId='$carsType'"); 
+          $rowT = mysqli_fetch_assoc($resultT);
+          echo $rowT['type'];
+
+          ?></h3>
+          <h5><?php 
+          $carsSegment=$car['carSegmentId'];
+          $resultS=mysqli_query($con,"SELECT * FROM carSegment where segmentId='$carsSegment'"); 
+          $rowS = mysqli_fetch_assoc($resultS);
+          echo $rowS['segment'];
+
+          ?></h5>
+          <h5><?php echo $car['branchdId'] ?></h5>
+          <div class="price">$<?php echo $car['price'] ?></div>
+
+          
+          <a href="<?php   if($_GET){
+              $bokingId=$_GET['bookId'];
+              $_SESSION['bookId']=$bokingId;
+              echo 'updateBooking.php?carId='.$car['carId'];
+                }else{
+                  echo 'booking.php?carId='.$car['carId'];
+                } ?>" class="btn" >Booking</a>
+          
         </div>
+        <?php } }?>
 
-        <div class="question">
-          <button>
-            <span>Lorem ipsum dolor sit amet?</span>
-            <img src="images/up-arrow.png" alt="" class="d-arrow" />
-          </button>
-          <p>
-           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad mollitia rerum ratione modi, doloribus laboriosam recusandae consectetur commodi soluta harum deleniti beatae, blanditiis neque. Est, iusto quas. Ut, ab eligendi!
-          </p>
-        </div>
-
-        <div class="question">
-          <button>
-            <span>Lorem ipsum dolor sit amet?</span>
-            <img src="images/up-arrow.png" alt="" class="d-arrow" />
-          </button>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt adipisci voluptates optio et perspiciatis id enim veniam sunt, nobis tempora ratione consectetur aspernatur nostrum eius temporibus minima eaque expedita? Dicta.
-          </p>
-        </div>
-
-        <div class="question">
-          <button>
-            <span>Lorem ipsum dolor sit amet?</span>
-            <img src="images/up-arrow.png" alt="" class="d-arrow" />
-          </button>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis in sapiente necessitatibus quaerat et voluptate optio ipsam labore culpa hic! Eius laboriosam laudantium laborum, deserunt incidunt ipsa recusandae cumque accusamus!
-          </p>
-        </div>
+      
       </div>
     </section>
+  
+
     <!-- Footer Start -->
     <footer class="footer-part" id="footer">
       <div class="footer-left">
@@ -166,7 +205,6 @@
     </footer>
 
     <!-- Footer Finish -->
-
-    <script src="user-js/faqs.js"></script>
   </body>
 </html>
+

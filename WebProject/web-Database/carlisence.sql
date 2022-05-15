@@ -3,7 +3,7 @@ CREATE TABLE `carlisence` (
   `lisenceId` int NOT NULL ,
   `lisence` varchar(500) NOT NULL,
   PRIMARY KEY (`lisenceId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 INSERT INTO `carlisence` (lisenceId,`lisence`)  VALUES ( 1,'a');

@@ -281,18 +281,16 @@ if(isset($_POST['booking'])){
     $price=$car['price'];
     $amount=$dateDifference->d* $price;
    
+    $bookId=$_SESSION['bookId'];
+    $updateBooking = ( "UPDATE booking SET  paymentId='$paymentId', carId='$carId',bookingDate='$bookingDate', purchaseDate='$purchaseDate', returnDate='$returnDate', amount='$amount' where bookingId='$bookId' ");
     
-      $sql2 = "INSERT INTO booking (paymentId,carId, userId, bookingDate,purchaseDate,returnDate,amount)
-    VALUES ($paymentId,'$carId', '$userId','$bookingDate','$purchaseDate','$returnDate','$amount ')";
-    if ($con->query($sql2) === TRUE) {
-      echo  "<script> alert('booking yapıldı');</script>";
-     
-
+    if ($con->query($updateBooking) === TRUE) {
+        echo  "<script> alert('booking yapıldı');</script>";
     } else {
-      echo "<script> alert('you could not register') </script>";
+        echo "<script> alert('you could not change BOOKİNG') </script>";
     }
     
-    
+
     $con->close();
     
 

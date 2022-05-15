@@ -32,7 +32,7 @@ session_start();
             <div class="header-menu">
               <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="index.php#about">About</a></li>
+                <li><a href="car-booking.php">Booking Car</a></li>
                 <li><a href="account.php#contact">Contact</a></li>
                 <li>
                   <div class="dropdown">
@@ -158,7 +158,7 @@ if(isset($_POST['login'])){
     $row = mysqli_fetch_assoc($result);
     if ($row['password'] === $password) {
       $_SESSION['email']=$row['eMail'];
-      header('location: account.php');
+      
       echo "<script type='text/javascript'>window.location.href='account.php';</script>";
       exit();
     } else {

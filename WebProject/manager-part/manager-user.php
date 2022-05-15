@@ -1,5 +1,12 @@
 <?php 
+
+session_start();
 include('../conn.php');
+if(!empty($_SESSION["email"])){
+
+}else{
+  header('location: manager-login.php');
+}
 $result = mysqli_query($con,"SELECT * FROM user_info");
 session_start();
 
@@ -29,7 +36,7 @@ session_start();
               <ul>
                 <li><a href="manager.php">Home</a></li>
                 <li><a href="manager-cars.php">Cars</a></li>
-
+                <li><a href="manager-bookings.php">Bookings</a></li>
                 <li><a href="manager-add-car.php">Add Car</a></li>
                 <li><a href="manager-user.php">Users</a></li>
                 <li><a href="manager-faq.php">Edit Faqs</a></li>

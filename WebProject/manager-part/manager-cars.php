@@ -1,5 +1,13 @@
 <?php 
- include('../conn.php');
+session_start();
+include('../conn.php');
+if(!empty($_SESSION["email"])){
+
+}else{
+  header('location: manager-login.php');
+}
+
+
  $result=mysqli_query($con,"SELECT * FROM car_info ");
 ?>
 <!DOCTYPE html>
@@ -26,6 +34,7 @@
               <ul>
                 <li><a href="manager.php">Home</a></li>
                 <li><a href="#">Cars</a></li>
+                <li><a href="manager-bookings.php">Bookings</a></li>
                 <li><a href="manager-add-car.php">Add Car</a></li>
                 <li><a href="manager-user.php">Users</a></li>
                 <li><a href="manager-faq.php">Edit Faqs</a></li>

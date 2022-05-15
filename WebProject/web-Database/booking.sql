@@ -11,5 +11,6 @@ CREATE TABLE `booking` (
   PRIMARY KEY (`bookingId`),
   foreign key (carId) References car_info (carId),
   foreign key (userId) References user_info (userId),
-  foreign key (paymentId) References payment (paymentId)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+  foreign key (paymentId) References payment (paymentId),
+  CONSTRAINT bookingcontrol UNIQUE(carId,purchaseDate,returnDate)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci

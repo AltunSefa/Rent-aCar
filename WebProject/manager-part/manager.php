@@ -1,3 +1,17 @@
+<?php 
+session_start();
+include('../conn.php');
+if(!empty($_SESSION["email"])){
+
+}else{
+  header('location: manager-login.php');
+}
+$users=mysqli_query($con,"select count(bookingId) as totalBooking from booking");
+$bookings=mysqli_query($con,"select count(bookingId) as totalBooking from booking");
+$totalBooking=mysqli_fetch_assoc($users);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,6 +36,7 @@
               <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="manager-cars.php">Cars</a></li>
+                <li><a href="manager-bookings.php">Bookings</a></li>
                 <li><a href="manager-add-car.php">Add Car</a></li>
                 <li><a href="manager-user.php">Users</a></li>
                 <li><a href="manager-faq.php">Edit Faqs</a></li>
@@ -30,10 +45,38 @@
               </ul>
             </div>
           </div>
-          <div class="header-text">
-            <h1><span class="first-letter">W</span>elcome</h1>
+          <div class="row">
+            <div class="box">
+              <h1>Total User</h1>
+              <h5><?php 
+              $users=mysqli_query($con,"select * from user_info");
+              echo mysqli_num_rows($users);
+               
+                ?></h5>
+            </div>
+            <div class="box">
+              <h1>Total Car</h1>
+              <h5><?php 
+              $cars=mysqli_query($con,"select * from car_info");
+              echo mysqli_num_rows($cars);
+               
+                ?></h5>
+            </div>
+            <div class="box">
+              <h1>Total Booking</h1>
+              <h5><?php 
+              $bookings=mysqli_query($con,"select * from booking");
+              echo mysqli_num_rows($bookings);
+               
+                ?></h5>
+            </div>
           </div>
-        </div>
+          
+          
+            
+          </div>
+          </div>
+        
       </div>
     </header>
 

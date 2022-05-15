@@ -1,6 +1,8 @@
 <?php 
+ session_start();
  include('conn.php');
  $result=mysqli_query($con,"SELECT * FROM car_info ");
+
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +29,7 @@
             <div class="header-menu">
               <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="index.php#about">About</a></li>
+                <li><a href="car-booking.php">Booking Car</a></li>
                 <li><a href="account.php#contact">Contact</a></li>
                 <li>
                   <div class="dropdown">
@@ -304,16 +306,18 @@
     <section class="car-menu" id="car-menu">
       <h1 class="car-type-heading">Cars</h1>
 
+      
+
       <div class="car-menu-container">
         
-      <?php 
+        <?php 
+    
+         
           while($car=mysqli_fetch_assoc($result)){
             
-              
-           
-          
+            
+         
         ?>
-
         <div class="car-box">
           <img src="images/<?php echo $car['carImg'] ?>" alt="" />
           <h2><?php echo $car['carName'] ?></h2>
@@ -332,12 +336,10 @@
 
           ?></h5>
           <div class="price">$<?php echo $car['price'] ?></div>
-          <a href="booking.php?carId=<?php echo$car['carId'] ?>" class="btn">Booking</a>
-        </div>
-        <?php } 
-
           
-        ?>
+          
+        </div>
+        <?php } ?>
 
       
       </div>

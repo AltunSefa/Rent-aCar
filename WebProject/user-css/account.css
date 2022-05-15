@@ -217,9 +217,6 @@ html::-webkit-scrollbar-thumb {
   text-align: center;
   padding-bottom: 90px;
 }
-.choice .user {
-  margin-top: 70px;
-}
 
 .choice .user img {
   height: 17rem;
@@ -256,7 +253,7 @@ html::-webkit-scrollbar-thumb {
 
 .choice .navbar ul li a {
   display: block;
-  padding: 1rem;
+  padding: 0.1rem;
   margin: 1.5rem 0;
   background: #333;
   color: #fff;
@@ -441,14 +438,23 @@ html::-webkit-scrollbar-thumb {
   justify-content: center;
   background: #111;
 }
+/*My reservation*/
+.my-reservation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #111;
+}
 .car-menu {
   background-color: black;
 }
 .car-menu-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 0.4fr));
   gap: 1.5rem;
-  padding: 50px 200px;
+  background-color: #111;
+  padding: 30px 200px;
+  justify-content: center;
 }
 
 .car-box {

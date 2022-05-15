@@ -22,7 +22,7 @@
             <div class="header-menu">
               <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="car-booking.php">Booking Car</a></li>
                 <li><a href="account.php#contact">Contact</a></li>
                 
                 <li>

@@ -3,7 +3,7 @@ CREATE TABLE `carbranch` (
   `branchdId` int NOT NULL ,
   `branch` varchar(500) NOT NULL,
   PRIMARY KEY (`branchdId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 INSERT INTO `carbranch` (branchdId,`branch`)  VALUES ( 1,'Antalya');

@@ -59,7 +59,7 @@ html::-webkit-scrollbar-thumb {
   background-position: center; /* pozisyonu merkeze aldı*/
   background-size: cover; /* resmin olduğu  divi kaplamasını sağlar*/
   background-attachment: fixed; /*sabit kalmasını sağladı*/
-  height: 100vh; /*yüksekliğini(vh dedi çünkü her tipe uygun olması için) sayfa boyunca ayarladı*/
+  height: 15vh; /*yüksekliğini(vh dedi çünkü her tipe uygun olması için) sayfa boyunca ayarladı*/
   overflow: hidden;
 }
 .header-navbar {
@@ -128,83 +128,35 @@ h3 {
   font-family: "Roboto", sans-serif;
 }
 /*header finish*/
-/*body*/
-
-.row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 250px;
+body {
+  color: black;
 }
 
-.box {
-  background-color: rgba(34, 34, 34, 0.699);
-  width: 350px;
-  height: 350px;
-  margin-right: 60px;
+section {
+  padding: 50px;
+  background-color: black;
+  height: 100%;
 }
-.box h1 {
-  margin-top: 20px;
-  font-family: "Courier New", Courier, monospace;
-  font-size: 40px;
+.bookingname {
+  margin: 50px;
   text-align: center;
-  color: #f9ca24;
 }
-.box h5 {
-  margin-top: 100px;
-  font-family: "Courier New", Courier, monospace;
-  font-size: 60px;
+.tablo {
+  margin-bottom: 550px;
+}
+table {
+  width: 100%;
+  height: 100%;
+}
+
+table,
+th,
+td {
+  background-color: white;
+  border: 1px solid;
+  color: black;
   text-align: center;
-  color: #f9ca24;
 }
-
-.box span,
-.box h3 {
-  color: white;
-  font-size: 12px;
-  padding: 1rem 0;
-}
-.box span {
-  color: #f9ca24;
-  font-size: 30px;
-  padding: 0 0.5rem;
-}
-/*Responsive*/
-/*header*/
-
-@media screen and (max-width: 1160px) {
-  .header li {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-}
-@media screen and (max-width: 980px) {
-  .header-navbar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  .header-text h1 {
-    font-size: 50px;
-  }
-  .header-text span {
-    font-size: 60px;
-  }
-  .header-text h3 {
-    font-size: 10px;
-  }
-}
-@media screen and (max-width: 832px) {
-  .header-menu a {
-    font-size: 8px;
-    padding: 9px 11px;
-  }
-  .header li {
-    margin-left: 5px;
-    margin-right: 5px;
-  }
-  .dropdown .dropbtn {
-    font-size: 8px;
-  }
+tr a {
+  color: red;
 }

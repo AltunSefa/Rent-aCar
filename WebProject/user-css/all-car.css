@@ -262,14 +262,6 @@ img {
   }
 }
 /*blogs car type*/
-/* heading-- blogs-car type*/
-/* heading-- car-type-heading*/
-/* box-container-- car-type-box*/
-/* blogs-- blogs-car type*/
-/* blogs-- blogs-car type*/
-/* blogs-- blogs-car type*/
-/* blogs-- blogs-car type*/
-/* blogs-- blogs-car type*/
 .blogs-car-type {
   background-color: black;
 }
@@ -353,6 +345,14 @@ img {
 .car-menu {
   background-color: black;
 }
+
+.selectCar {
+  display: flex;
+  justify-content: center;
+  margin: 30px 150px;
+  border-bottom: 3px solid white;
+}
+
 .car-menu-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30rem, 0.4fr));

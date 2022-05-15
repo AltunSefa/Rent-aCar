@@ -7,7 +7,6 @@ CREATE TABLE `car_info` (
   `price` int NOT NULL,
   `carImg` varchar(45) NOT NULL ,
   `carDsc` varchar(500)  NOT NULL,
-  `carStatus` int NOT NULL,
   `carTypeId` int NOT NULL,
   `carSegmentId` int NOT NULL,
   `lisenceId` int NOT NULL,
@@ -24,4 +23,4 @@ CREATE TABLE `car_info` (
   foreign key (fuelId) References carfuel (fuelId),
   foreign key (passengerId) References carpassenger (passengerId),
   foreign key (branchdId) References carbranch (branchdId) 
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

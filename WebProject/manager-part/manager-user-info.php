@@ -40,7 +40,7 @@ include('../conn.php');
               <ul>
                 <li><a href="manager.php">Home</a></li>
                 <li><a href="manager-cars.php">Cars</a></li>
-
+                <li><a href="manager-bookings.php">Bookings</a></li>
                 <li><a href="manager-add-car.php">Add Car</a></li>
                 <li><a href="manager-user.php">Users</a></li>
                 <li><a href="manager-faq.php">Edit Faqs</a></li>
@@ -82,16 +82,27 @@ include('../conn.php');
           </div>
           <div class="counter">
             <div class="box">
-              <span>2+</span>
+              <span><?php 
+              $date = date("Y-m-d");
+              $dateDifference = date_diff(date_create($row['date']), date_create($date));
+              echo $dateDifference->y; ?></span>
               <h3>years of experience</h3>
             </div>
             <div class="box">
-              <span>5+</span>
+              <span><?php $sql = "select count(booking.bookingId) from booking where userId='$row[userId]' ";
+                  $result = mysqli_query($con, $sql);
+                  $rows = mysqli_fetch_assoc($result);
+                  echo $rows['count(booking.bookingId)'];
+                   ?></span>
               <h3>Booking</h3>
             </div>
           </div>
           <div class="comment-box">
-            <img src="../images/person-1.png" alt="" id="comment-photo" />
+            <img src="../images/<?php if(!empty($row['userImg'])){
+                                          echo  $row['userImg'];
+                                         }else{
+                                            echo'user.png';
+                                          } ?>" alt="" id="comment-photo" />
             <h3><?php echo  $row['eMail'] ?></h3>
             <?php
                $email=$row['eMail'];

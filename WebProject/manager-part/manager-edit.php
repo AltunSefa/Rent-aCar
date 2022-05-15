@@ -7,6 +7,7 @@
   $result4=mysqli_query($con,"SELECT * FROM cargear ");
   $result5=mysqli_query($con,"SELECT * FROM carfuel ");
   $result6=mysqli_query($con,"SELECT * FROM carpassenger ");
+  $result7=mysqli_query($con,"SELECT * FROM carbranch ");
 
   $carId=$_GET['carId'];
   $sql = "SELECT * FROM car_info WHERE carId='$carId' ";
@@ -45,7 +46,7 @@
               <ul>
                 <li><a href="manager.php">Home</a></li>
                 <li><a href="manager-cars.php">Cars</a></li>
-
+                <li><a href="manager-bookings.php">Bookings</a></li>
                 <li><a href="manager-add-car.php">Add Car</a></li>
                 <li><a href="manager-user.php">Users</a></li>
                 <li><a href="manager-faq.php">Edit Faqs</a></li>
@@ -124,6 +125,20 @@
               ><?php echo $row['carDsc'] ?></textarea>
             </div>
 
+            <div class="form-group">
+              <select name="branch" required >
+                <option value="<?php $carBranch=$row['branchdId'];
+                $resultBranch=mysqli_query($con,"SELECT * FROM carbranch where branchdId='$carBranch'"); 
+                $rowBranch = mysqli_fetch_assoc($resultBranch);
+                  echo $rowBranch['branch']; ?>" disabled selected><?php echo $rowBranch['branch'] ?></option>
+                <?php while($branch=mysqli_fetch_assoc($result7)){ ?>
+                <option value="<?php echo $branch['branch'] ?>"><?php echo $branch['branch'] ?></option>
+                <?php } ?>
+              </select>
+            </div>
+            
+                
+
            
             
             <div class="form-group">
@@ -173,9 +188,9 @@
             </div>
 
             <div class="buttons">
-            <button class="btn" id="btn" type="submit" name="edit">Edit</button>
-            <button class="btn" type="submit"name="delete">Delete</button>
-          </div>
+              <button class="btn" id="btn" type="submit" name="edit">Edit</button>
+              <button class="btn" type="submit"name="delete">Delete</button>
+            </div>
           </form>
           
         </div>
@@ -201,7 +216,7 @@ if(isset($_POST['edit'])){
     if ($con->query($sql) === TRUE) {
           
     } else {
-        echo "<script> alert('you could not change car Name') </script>";
+      echo "<script> alert('you could not change car Name') </script>";
     }
   }
   $carBrand=$sorguRow['carBrand'];
@@ -284,6 +299,24 @@ if(isset($_POST['edit'])){
           
     } else {
       echo "<script> alert('you could not change car Description') </script>";
+    }
+  }
+  $carBranchId=$sorguRow['branchdId'];
+  $newCarBranch=$_POST['branch'];
+  $result71=mysqli_query($con,"SELECT * FROM carbranch where `branch`='$newCarBranch' ");
+   
+  if (mysqli_num_rows($result71) === 1) {
+  $row = mysqli_fetch_assoc($result71);
+  $newCarBranchId=$row['branchdId'];
+    if( $carBranchId===$newCarBranchId){
+
+    }else{
+      $sql = "UPDATE car_info SET branchdId='$newCarBranchId' WHERE carId=$carId";
+      if ($con->query($sql) == TRUE) {
+          
+      } else {
+        echo "<script> alert('you could not change car lisence') </script>";
+      }
     }
   }
   $carLicenceId=$sorguRow['lisenceId'];
@@ -375,12 +408,14 @@ if(isset($_POST['edit'])){
 }
 
 if(isset($_POST['delete'])){
-  $sorgu=mysqli_query($con,"DELETE FROM car_info where carId=$carId");
-  if ($con->query($sql) === TRUE) {
-            
-  } else {
-    echo "<script> alert('you could not delete car') </script>";
-  }
+  $sql = "DELETE FROM car_info where carId='$carId'";
+
+if ($con->query($sql) === TRUE) {
+  echo "Record deleted successfully";
+} else {
+  echo "<script> alert('you could not delete car') </script>";
+}
+  
   echo "<script type='text/javascript'>window.location.href='manager-cars.php';</script>";
  
 }

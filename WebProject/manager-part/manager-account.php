@@ -1,3 +1,15 @@
+<?php 
+session_start();
+include('../conn.php');
+if(!empty($_SESSION["email"])){
+  $email = $_SESSION["email"];
+  $result=mysqli_query($con,"SELECT * FROM admin_info Where eMail = '$email' ");
+  $row = mysqli_fetch_assoc($result);
+}else{
+  header('location: manager-login.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,7 +35,7 @@
               <ul>
                 <li><a href="manager.php">Home</a></li>
                 <li><a href="manager-cars.php">Cars</a></li>
-
+                <li><a href="manager-bookings.php">Bookings</a></li>
                 <li><a href="manager-add-car.php">Add Car</a></li>
                 <li><a href="manager-user.php">Users</a></li>
                 <li><a href="manager-faq.php">Edit Faqs</a></li>
@@ -41,15 +53,15 @@
     <div class="choice">
       <div class="user">
         <img src="../images/user.png" alt="" />
-        <h3 class="name">Sefa Altun</h3>
-        <p class="post">Manager</p>
+        <h3 class="name"><?php echo  $row['adminName'] ?></h3>
+        <p class="post">Admin</p>
       </div>
 
       <nav class="navbar">
         <ul>
           <li><a href="#information">İnformation</a></li>
           <li><a href="#change-password">Change Password</a></li>
-          <li><a href="manager.html">Log out</a></li>
+          <li><a href="manager-logout.php">Log out</a></li>
         </ul>
       </nav>
     </div>
@@ -63,28 +75,36 @@
 
       <div class="row">
         <div class="info">
+          <form action="" method="post">
           <div class="form-group">
             <label for="name">Username</label>
-            <input type="text" required value="Sefa Altun" />
+            <input type="text" name="name" required value="<?php echo  $row['adminName'] ?>" />
           </div>
           <div class="form-group">
             <label for="name">Age</label>
-            <input type="text" required value="22" />
+            <input type="text" name="Age" required value="<?php if(!empty($row['age'])){
+          echo  $row['age'];
+        }else{
+          
+        } ?>" />
           </div>
           <div class="form-group">
             <label for="name">Gender</label>
-            <input type="text" required value="Male" />
-          </div>
-          <div class="form-group">
-            <label for="name">email</label>
-            <input type="text" required value="abc@gmail.com" />
+            <input type="text" name="Gender" required value="<?php if(!empty($row['gender'])){
+          echo  $row['gender'];
+        }else{
+          
+        } ?>" />
           </div>
           <div class="form-group">
             <label for="name">Phone</label>
-            <input type="text" required value="5654684654" />
+            <input type="text" name="Phone" required value="<?php echo  $row['phoneNumber'] ?>" />
           </div>
 
-          <button class="btn" type="submit">Save Change</button>
+          <button class="btn" type="submit" name="saveChange">Save Change</button>
+
+
+          </form>
         </div>
       </div>
     </section>
@@ -96,22 +116,122 @@
       <h3 class="heading"><span>Change</span> Password</h3>
       <div class="row">
         <div class="password-info">
+          <form action="" method="post">
           <div class="form-group">
             <label for="name">Old Password</label>
-            <input type="password" required />
+            <input type="password" required name="oldPassword"/>
           </div>
           <div class="form-group">
             <label for="name">New Password</label>
-            <input type="password" required />
+            <input type="password" required name="newPassword"/>
           </div>
           <div class="form-group">
             <label for="name">New Password</label>
-            <input type="password" required />
+            <input type="password" required name="newPassword2"/>
           </div>
-          <button class="btn" type="submit">Save Change</button>
+          <button class="btn" type="submit" name="passwordBtn">Save Change</button>
+          </form>
         </div>
       </div>
     </section>
     <!-- Finish Change Password -->
   </body>
 </html>
+<?php 
+if(isset($_POST['saveChange'])){
+  $adminId=$row['adminId'];
+  $newName=$_POST['name'];
+  $adminName=$row['adminName'];
+  if($newName===$adminName){
+
+  }else{
+    $sql = "UPDATE admin_info SET adminName='$newName' WHERE adminId=$adminId";
+    if ($con->query($sql) === TRUE) {
+					
+    } else {
+      echo "<script> alert('you could not change admin name') </script>";
+    }
+      
+  
+  }
+  $newAge=$_POST['Age'];
+  $age=$row['age'];
+  if($newAge===$age){
+
+  }else{
+    $sql = "UPDATE admin_info SET age='$newAge' WHERE adminId=$adminId";
+    if ($con->query($sql) === TRUE) {
+					
+    } else {
+      echo "<script> alert('you could not change your age') </script>";
+    }
+      
+    
+  }
+  $newGender=$_POST['Gender'];
+  $gender=$row['gender'];
+  if($newGender===$gender){
+
+  }else{
+    $sql = "UPDATE admin_info SET gender='$newGender' WHERE adminId=$adminId";
+    if ($con->query($sql) === TRUE) {
+					
+    } else {
+      echo "<script> alert('you could not change your age') </script>";
+    }
+      
+    
+  }
+  $newPhone=$_POST['Phone'];
+  $phone=$row['phoneNumber'];
+  if($newPhone===$phone){
+
+  }else{
+    $sql = "UPDATE admin_info SET phoneNumber='$phoneNumber' WHERE adminId=$adminId";
+    if ($con->query($sql) === TRUE) {
+					
+    } else {
+      echo "<script> alert('you could not change your Phone') </script>";
+    }
+      
+    $con->close();
+  }
+
+  
+  echo "<script type='text/javascript'>window.location.href='manager-account.php';</script>";
+}
+
+if(isset($_POST['passwordBtn'])){
+  $oldPassword=$_POST['oldPassword'];
+  $oldPassword=md5($oldPassword);
+  $newPassword=$_POST['newPassword'];
+  $newPassword2=$_POST['newPassword2'];
+  if($oldPassword===$row['password']){
+    
+    if( $newPassword=== $newPassword2){
+      $adminId=$row['adminId'];
+      $newPassword=md5($newPassword);
+      $sql = "UPDATE admin_info SET password='$newPassword' WHERE adminId=$adminId";
+      if ($con->query($sql) === TRUE) {
+        echo "<script> alert('you change your Phone') </script>";
+        echo "<script type='text/javascript'>window.location.href='manager-account.php';</script>";
+      } else {
+        echo "<script> alert('you could not change your password') </script>";
+      }
+        
+      $con->close();
+      
+
+
+    }else{
+      echo "<script> alert('Confirm Password is not same New password') </script>";
+      
+    }
+
+  }else{
+    echo "<script> alert('Please enter true old password') </script>";
+  }
+
+}
+
+?>

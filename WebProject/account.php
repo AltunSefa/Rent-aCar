@@ -6,8 +6,9 @@ if(!empty($_SESSION["email"])){
   $result=mysqli_query($con,"SELECT * FROM user_info Where eMail = '$email' ");
   $row = mysqli_fetch_assoc($result);
 }else{
-  header('location: login.php');
+  echo "<script type='text/javascript'>window.location.href='login.php';</script>";
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +35,7 @@ if(!empty($_SESSION["email"])){
             <div class="header-menu">
               <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="index.php#about">About</a></li>
+                <li><a href="car-booking.php">Booking Car</a></li>
                 <li><a href="account.php#contact">Contact</a></li>
                 <li>
                   <div class="dropdown">
@@ -89,7 +90,7 @@ if(!empty($_SESSION["email"])){
            enctype="multipart/form-data">
 
            <input type="file" 
-                  name="my_image" class="photo">
+                  name="my_image" required class="photo">
 
 
            <input type="submit" 
@@ -106,7 +107,8 @@ if(!empty($_SESSION["email"])){
           <li></li>
           <li><a href="#information">İnformation</a></li>
           <li><a href="#change-password">Change Password</a></li>
-          <li><a href="#my-rentals">my rentals</a></li>
+          <li><a href="#my-current-rentals">my current rentals</a></li>
+          <li><a href="#my-rentals">my old rentals</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="logout.php" name = "logout">Log out</a></li>
           
@@ -133,7 +135,7 @@ if(!empty($_SESSION["email"])){
             <input type="text" name="age" required value="<?php if(!empty($row['age'])){
           echo  $row['age'];
         }else{
-          echo'please enter age';
+          
         } ?>" />
           </div>
           <div class="form-group">
@@ -141,7 +143,7 @@ if(!empty($_SESSION["email"])){
             <input type="text" name="gender" required value="<?php if(!empty($row['gender'])){
           echo  $row['gender'];
         }else{
-          echo'please enter gender';
+          
         } ?>" />
           </div>
           <div class="form-group">
@@ -181,34 +183,133 @@ if(!empty($_SESSION["email"])){
       </div>
     </section>
     <!-- Finish Change Password -->
+    <!-- Start   My current Rentals -->
+    <?php 
+    $userId=$row['userId'];
+    $resultBooking=mysqli_query($con,"SELECT * FROM booking Where userId = '$userId'");
+    
+    
+    ?>
 
-    <!-- Start My Rentals -->
 
-    <section class="my-rentals" id="my-rentals">
-      <h3 class="heading">my <span> Old Rentals</span></h3>
-
+    <section class="my-rentals" id="my-current-rentals">
+      <h3 class="heading">my <span> current Rentals</span></h3>
+    
       <div class="car-menu-container">
+      <?php while($rowBooking = mysqli_fetch_assoc($resultBooking)){ 
+        
+        $date=date("Y-m-d");
+        
+        $bookedCarId=$rowBooking['carId'];
+        $cars=mysqli_query($con,"SELECT * FROM car_info Where carId = '$bookedCarId'");
+        $car=mysqli_fetch_assoc($cars);
+        if($rowBooking['purchaseDate']>$date){
+          
+        
+        ?>
+
         <div class="car-box">
-          <img src="images/car-5.png" alt="" />
-          <h2>N</h2>
-          <h3>Pick up</h3>
-          <h5>Luxury Car</h5>
-          <h5>2022-01-15 / 2022-01-25</h5>
-          <div class="price">$15.99</div>
-          <a href="#" class="btn">Booking Again</a>
+          <img src="images/<?php echo $car['carImg'];?>" alt="" />
+          <h2> <?php echo $car['carName']; ?></h2>
+          <h3><?php $carSegmentId= $car['carSegmentId'];
+              $carsegment=mysqli_query($con,"SELECT * FROM carsegment Where segmentId = '$carSegmentId'");
+              $segment=mysqli_fetch_assoc($carsegment);
+              echo $segment['segment'];
+          ?></h3>
+          <h5><?php $carTypeId= $car['carTypeId'];
+          $cartype=mysqli_query($con,"SELECT * FROM cartype Where typeId = '$carTypeId'");
+          $type=mysqli_fetch_assoc($cartype);
+          echo $type['type']; ?></h5>
+          <h5><?php $branchdId= $car['branchdId'];
+          $carbranch=mysqli_query($con,"SELECT * FROM carbranch Where branchdId = '$branchdId'");
+          $branch=mysqli_fetch_assoc($carbranch);
+          echo $branch['branch']; ?></h5>
+          <h5><?php echo $rowBooking['purchaseDate']; ?> / <?php echo $rowBooking['returnDate']; ?></h5>
+          <div class="price">$<?php echo $car['price']; ?></div>
+          <a href="car-booking.php?bookId=<?php echo $rowBooking['bookingId'] ?>" class="btn">Edit</a>
+          <a href="deleteCar.php?bookId=<?php echo $rowBooking['bookingId'] ?>" class="btn">delete</a>
         </div>
-        <div class="car-box">
-          <img src="images/car-6.png" alt="" />
-          <h2>O</h2>
-          <h3>Pick up</h3>
-          <h5>Comfort Car</h5>
-          <h5>2022-02-15 / 2022-03-25</h5>
-          <div class="price">$15.99</div>
-          <a href="#" class="btn">Booking Again</a>
-        </div>
+        <?php } } ?>
+
+
+          
+
+
+
+
+
+        
       </div>
 
     </section>
+
+    <?php 
+    $userId=$row['userId'];
+    $resultBooking=mysqli_query($con,"SELECT * FROM booking Where userId = '$userId'");
+    
+    
+    ?>
+
+
+    <section class="my-rentals" id="my-current-rentals">
+      <h3 class="heading">my <span> old Rentals</span></h3>
+    
+      <div class="car-menu-container">
+      <?php while($rowBooking = mysqli_fetch_assoc($resultBooking)){ 
+        $date=date("Y-m-d");
+        
+        $bookedCarId=$rowBooking['carId'];
+        $cars=mysqli_query($con,"SELECT * FROM car_info Where carId = '$bookedCarId'");
+        $car=mysqli_fetch_assoc($cars);
+        if($rowBooking['returnDate']<$date){
+          
+        
+        ?>
+
+        <div class="car-box">
+          <img src="images/<?php echo $car['carImg'];?>" alt="" />
+          <h2> <?php echo $car['carName']; ?></h2>
+          <h3><?php $carSegmentId= $car['carSegmentId'];
+              $carsegment=mysqli_query($con,"SELECT * FROM carsegment Where segmentId = '$carSegmentId'");
+              $segment=mysqli_fetch_assoc($carsegment);
+              echo $segment['segment'];
+          ?></h3>
+          <h5><?php $carTypeId= $car['carTypeId'];
+          $cartype=mysqli_query($con,"SELECT * FROM cartype Where typeId = '$carTypeId'");
+          $type=mysqli_fetch_assoc($cartype);
+          echo $type['type']; ?></h5>
+          <h5><?php $branchdId= $car['branchdId'];
+          $carbranch=mysqli_query($con,"SELECT * FROM carbranch Where branchdId = '$branchdId'");
+          $branch=mysqli_fetch_assoc($carbranch);
+          echo $branch['branch']; ?></h5>
+          <h5><?php echo $rowBooking['purchaseDate']; ?> / <?php echo $rowBooking['returnDate']; ?></h5>
+          <div class="price">$<?php echo $car['price']; ?></div>
+          
+        </div>
+        <?php } } ?>
+
+
+          
+
+
+
+
+
+        
+      </div>
+
+    </section>
+    <!-- Finish My Rentals -->
+
+    <!-- Start My old Rentals -->
+    <?php 
+    $userId=$row['userId'];
+    $resultBooking=mysqli_query($con,"SELECT * FROM booking Where userId = '$userId'");
+    
+    
+    ?>
+
+    
     <!-- Finish My Rentals -->
 
     <!-- Starts contact section   -->
@@ -353,7 +454,7 @@ if(isset($_POST['aboutMeBtn'])){
   if($newPhone===$phone){
 
   }else{
-    $sql = "UPDATE user_ınfo SET eMail='$newPhone' WHERE userId=$userId";
+    $sql = "UPDATE user_info SET phoneNumber='$newPhone' WHERE userId=$userId";
     if ($con->query($sql) === TRUE) {
 					
     } else {
@@ -416,6 +517,7 @@ if(isset($_POST['sendBtn'])){
 
   
 }
+
 
 ?>
 

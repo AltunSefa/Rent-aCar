@@ -189,6 +189,7 @@ body {
   background-color: black;
   padding: 30px 200px;
   justify-content: center;
+  min-height: 50vh;
 }
 
 .box {
