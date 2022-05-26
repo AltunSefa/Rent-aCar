@@ -7,6 +7,17 @@
  
  $result=mysqli_query($con,"SELECT * FROM car_info ");
  $branchs=mysqli_query($con,"SELECT * FROM carbranch ");
+ if($_GET){
+  $bokingId=$_GET['bookId'];
+
+  $deleteDate=("UPDATE booking SET bookingDate='1900/1/1', purchaseDate='1900/1/1', returnDate='1900/1/1' where bookingId='$bokingId' ");
+  if ($con->query($deleteDate) === TRUE) {
+    
+
+  } else {
+    echo "<script> alert('you could not date') </script>";
+  }
+ }
  
 ?>
 <!DOCTYPE html>
@@ -59,7 +70,7 @@
                     <div class="dropdown-content">
                       <a href="account.php#information">Your Information</a>
                       <a href="account.php#change-password">Change Password</a>
-                      <a href="account.php#my-rentals">My Rentals</a>
+                      <a href="account.php#my-current-rentals">My Current Rentals</a>
                     </div>
                   </div>
                 </li>
@@ -86,8 +97,8 @@
       
           <option value="<?php echo $branch['branch'];?>"><?php echo $branch['branch'];?></option>
           <?php } ?>
-          <input type="date" class="select" name="purchaseDate" required min="<?php echo date("Y-m-d");?> " />
-          <input type="date"class="select" name="returnDate" required min="<?php echo date("Y-m-d");?>" />
+          <input type="date" class="select" required name="purchaseDate" min="<?php echo date("Y-m-d"); ?>" />
+          <input type="date"class="select" required name="returnDate"  min="<?php echo date("Y-m-d"); ?>" />
       
           <button type="submit" class="btn" name="show">show</button>
 
@@ -98,21 +109,31 @@
       <div class="car-menu-container">
         
         <?php 
-    
-    if(isset($_POST['show'])){
-      $_SESSION['SelectBranch']=$_POST['SelectBranch'];
-      $_SESSION['purchaseDate']=$_POST['purchaseDate'];
-      $_SESSION['returnDate']=$_POST['returnDate'];
-      $branchName=$_POST['SelectBranch'];
-      $purchaseDate=$_POST['purchaseDate'];
-      $returnDate=$_POST['returnDate'];
-
-      $invalidCar=mysqli_query($con,"SELECT * FROM car_info c inner join carbranch cb on cb.branchdId=c.branchdId  WHERE c.carId not in (SELECT cc.carId FROM  booking cc  inner join car_info  on car_info.carId = cc.carId AND  '$purchaseDate' BETWEEN cc.purchaseDate AND cc.returnDate
-      OR '$returnDate' BETWEEN cc.purchaseDate AND cc.returnDate or purchaseDate > '$purchaseDate' and returnDate < '$returnDate') AND cb.branch LIKE '%".$branchName."%' ");
-      
         
 
-        while($car=mysqli_fetch_assoc($invalidCar)){
+        if($_POST){
+          if($_POST['purchaseDate']<=$_POST['returnDate']){
+          
+
+
+            if(isset($_POST['show'])){
+              $_SESSION['SelectBranch']=$_POST['SelectBranch'];
+              $_SESSION['purchaseDate']=$_POST['purchaseDate'];
+              $_SESSION['returnDate']=$_POST['returnDate'];
+              $branchName=$_POST['SelectBranch'];
+              $purchaseDate=$_POST['purchaseDate'];
+              $returnDate=$_POST['returnDate'];
+        
+              $invalidCar=mysqli_query($con,"SELECT * FROM car_info c inner join carbranch cb on cb.branchdId=c.branchdId  WHERE c.carId not in (SELECT cc.carId FROM  booking cc  inner join car_info  on car_info.carId = cc.carId AND  '$purchaseDate' BETWEEN cc.purchaseDate AND cc.returnDate
+              OR '$returnDate' BETWEEN cc.purchaseDate AND cc.returnDate or purchaseDate > '$purchaseDate' and returnDate < '$returnDate') AND cb.branch LIKE '%".$branchName."%' ");
+              
+                
+        
+                while($car=mysqli_fetch_assoc($invalidCar)){
+
+        
+    
+    
           
           
     
@@ -135,7 +156,14 @@
           echo $rowS['segment'];
 
           ?></h5>
-          <h5><?php echo $car['branchdId'] ?></h5>
+          <h5><?php 
+          $carBranch=$car['branchdId'];
+          $resultB=mysqli_query($con,"SELECT * FROM carbranch where branchdId='$carBranch'"); 
+          $rowB = mysqli_fetch_assoc($resultB);
+          echo $rowB['branch'];
+
+          ?></h5>
+          
           <div class="price">$<?php echo $car['price'] ?></div>
 
           
@@ -148,7 +176,8 @@
                 } ?>" class="btn" >Booking</a>
           
         </div>
-        <?php } }?>
+        <?php } } }else{
+          echo "<script> alert('please enter valid date') </script>";} }?>
 
       
       </div>

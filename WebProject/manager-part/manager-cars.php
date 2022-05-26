@@ -78,6 +78,13 @@ if(!empty($_SESSION["email"])){
           echo $rowS['segment'];
 
           ?></h5>
+          <h5><?php 
+          $carBranch=$car['branchdId'];
+          $resultB=mysqli_query($con,"SELECT * FROM carbranch where branchdId='$carBranch'"); 
+          $rowB = mysqli_fetch_assoc($resultB);
+          echo $rowB['branch'];
+
+          ?></h5>
           <div class="price">$<?php echo $car['price'] ?></div>
           <a href="manager-edit.php?carId=<?php echo $car['carId'] ?>" class="btn">Edit</a>
         </div>

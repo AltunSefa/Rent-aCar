@@ -1,13 +1,12 @@
-
 <?php session_start();
 include('../conn.php');
-if(!empty($_SESSION["email"])){
+if($_GET){
 
 }else{
-  header('location: manager-login.php');
+  header('location: manager-faq-php.php');
 }
-
-$result=mysqli_query($con,"SELECT * FROM faqs ");
+$faqId=$_GET['faqId'];
+$result = mysqli_query($con,"SELECT * FROM faqs where faqId='$faqId' ");
   
 
 ?>
@@ -50,72 +49,58 @@ $result=mysqli_query($con,"SELECT * FROM faqs ");
     </header>
     <!-- Finish header -->
 
-    <section>
+    <section style="height: 85vh;">
       
-
-      <div class="questions-container">
-       <h1 class="title">ADD FAQ's</h1>
-        
-        <div class="questions">
-          <form action="" method="post">
-            <div class="question">
-              <label for="l1">Question:</label>
-              <input type="text"  name="questions" />
-            </div>
-            <div class="answer">
-              <label for="name">Answer:   </label>
-              <input type="text" required name="answer" />
-            </div>
-            <div class="buttons">
-            <button type="submit"  name="add"> add </button>
-            </div>
-
-          </form>
-          
-        </div>
-
-        
-      </div>
       <div class="questions-container">
         <h1 class="title">FAQ's</h1>
         <?php while($row = mysqli_fetch_assoc($result)){ ?>
         <div class="questions">
-
-          <div class="question">
-            <p><span>Question: </span><?php echo $row['question'] ?></p>
-          </div>
-          <div class="answer">
-            <p><span>Answer: </span> <?php echo $row['answer'] ?></p>
-            
-          </div>
+          <form action="" method="post">
+            <div class="question">
+              <label for="l1">Question:</label>
+              <input type="text" name="questionEdit" value="<?php echo $row['question'] ?>" />
+            </div>
+            <div class="answer">
+              <label for="name">Answer:   </label>
+              <input type="text" name="answerEdit" required value="<?php echo $row['answer'] ?>" />
+            </div>
           
-          <div class="buttons">
-            <button><a href="manager-faq-edit.php?faqId=<?php echo $row['faqId'] ?>" >Edit</a></button>
-          </div>
+            <div class="buttons">
+                <button type="submit"  name="Edit"> Edit </button>
+                <button type="submit"  name="Delete"> Delete </button>
+            </div>
+          </form>
         </div>
         <?php } ?>
 
       </div>
       
     </section>
-    <!-- <script src="manager-js/manager-faq.js"></script> -->
+    
   </body>
 </html>
 <?php 
-if(isset($_POST['add'])){
-  $question=$_POST['questions'];
-  $answer=$_POST['answer'];
 
-  $sql = "INSERT INTO `faqs` (question, answer) VALUES ( '$question','$answer')";
-  if ($con->query($sql) === TRUE) {
-    echo "<script> alert('you add a new question and its answer') </script>";
-  } else {
-    echo "<script> alert('you could not add a new question and its answer ') </script>";
-  }
-  echo "<script type='text/javascript'>window.location.href='manager-faq.php';</script>";
-
+if(isset($_POST['Edit'])){
+    $newQuestion=$_POST['questionEdit'];
+    $newAnswer=$_POST['answerEdit'];
+    if($newQuestion!=$row['question'] || $newAnswer!=$row['answer']){
+        $sql = "UPDATE faqs SET question='$newQuestion',answer='$newAnswer' WHERE faqId=$faqId";
+      if ($con->query($sql) === TRUE) {
+        echo "<script type='text/javascript'>window.location.href='manager-faq.php';</script>";
+      } else {
+         echo "<script> alert('you could not change this faq') </script>";
+         echo "<script type='text/javascript'>window.location.href='manager-faq.php';</script>";
+        }
+    }
 }
-
-
-
+if(isset($_POST['Delete'])){
+    $sorgu="DELETE FROM faqs where faqId='$faqId'";
+    if ($con->query($sorgu) === TRUE) {
+              
+    } else {
+      echo "<script> alert('you could not delete this faq') </script>";
+    }
+    echo "<script type='text/javascript'>window.location.href='manager-faq.php';</script>";
+}
 ?>

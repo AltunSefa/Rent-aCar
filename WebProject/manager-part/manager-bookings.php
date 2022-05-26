@@ -54,7 +54,7 @@ session_start();
       <div class="bookingname">
         <h1>Bookings</h1>
       </div>
-      <div class="tablo">
+      <div class="tablo" style="overflow-x: auto;">
       <table>
         <thead>
           <tr>
@@ -81,7 +81,7 @@ session_start();
             <td><?php echo $book['returnDate'] ?></td>
             <td><?php echo $book['amount'] ?></td>
             <td><?php echo $book['userName'] ?></td>
-            <td><a href="manager-user-info.php?userId=<?php echo $book['carId'] ?>" class="btn">Show Car Details</a></td>
+            <td><a href="manager-user-info.php?userId=<?php echo $book['userId'] ?>" class="btn">Show User Details</a></td>
             
           </tr>
           <?php } ?>

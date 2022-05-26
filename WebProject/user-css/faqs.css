@@ -183,7 +183,7 @@ section {
   background-position: center; /* pozisyonu merkeze aldı*/
   background-size: cover; /* resmin olduğu  divi kaplamasını sağlar*/
   background-attachment: fixed; /*sabit kalmasını sağladı*/
-  height: 85vh; /*yüksekliğini(vh dedi çünkü her tipe uygun olması için) sayfa boyunca ayarladı*/
+
   overflow: hidden;
 }
 section h1 {

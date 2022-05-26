@@ -134,7 +134,7 @@ body {
 
 section {
   padding: 50px;
-  background-color: black;
+  background-color: rgb(0, 0, 0);
   height: 100%;
 }
 .bookingname {
@@ -152,11 +152,83 @@ table {
 table,
 th,
 td {
-  background-color: white;
   border: 1px solid;
   color: black;
   text-align: center;
 }
+th {
+  background-color: white;
+}
 tr a {
   color: red;
+}
+tr:nth-child(even) {
+  background-color: white;
+}
+tr:nth-child(odd) {
+  background-color: #f2f2f2d2;
+}
+/*Responsive*/
+/*header*/
+@media screen and (max-width: 1630px) {
+  .header {
+    height: 20vh;
+  }
+  .header-logo-text {
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 1300px) {
+  .header {
+    height: 25vh;
+  }
+  .header-logo-text {
+    font-size: 20px;
+  }
+  .header-navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 1160px) {
+  .header {
+    height: 27vh;
+  }
+  .header li {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+@media screen and (max-width: 980px) {
+  .bookingname h1 {
+    font-size: 60px;
+  }
+  .header {
+    height: 30vh;
+  }
+  .header-text h1 {
+    font-size: 50px;
+  }
+  .header-text span {
+    font-size: 60px;
+  }
+  .header-text h3 {
+    font-size: 10px;
+  }
+}
+@media screen and (max-width: 832px) {
+  .header-menu a {
+    font-size: 8px;
+    padding: 9px 11px;
+  }
+  .header li {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .dropdown .dropbtn {
+    font-size: 8px;
+  }
 }

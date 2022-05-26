@@ -8,7 +8,7 @@ if(!empty($_SESSION["email"])){
   header('location: manager-login.php');
 }
 $result = mysqli_query($con,"SELECT * FROM user_info");
-session_start();
+
 
 ?>
 <!DOCTYPE html>

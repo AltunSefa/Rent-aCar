@@ -266,6 +266,14 @@ input[type="time"] {
   color: black;
   padding: 10px 20px;
 }
+.Amount {
+  margin: 20px;
+}
+.Amount p {
+  border: 2px solid white;
+  color: white;
+  padding: 10px 20px;
+}
 
 .place {
   margin-left: 70px;

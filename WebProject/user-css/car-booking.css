@@ -160,6 +160,7 @@ h1 {
   letter-spacing: 2px;
   font-family: "Herr Von Muellerhoff", cursive;
   color: #ffd369;
+  padding-top: 50px;
 }
 
 .first-letter {
@@ -272,47 +273,7 @@ section h1 {
   border: 2px solid black;
   border-radius: 50px;
 }
-/*Responsive*/
-/*header*/
 
-@media screen and (max-width: 1160px) {
-  .header li {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-}
-@media screen and (max-width: 980px) {
-  .header {
-    height: 20vh;
-  }
-  .header-navbar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  .header-text h1 {
-    font-size: 50px;
-  }
-  .header-text span {
-    font-size: 60px;
-  }
-  .header-text h3 {
-    font-size: 10px;
-  }
-}
-@media screen and (max-width: 832px) {
-  .header-menu a {
-    font-size: 8px;
-  }
-  .header li {
-    margin-left: 5px;
-    margin-right: 5px;
-  }
-  .dropdown .dropbtn {
-    font-size: 8px;
-  }
-}
 footer {
   bottom: 0;
   margin-top: 0;
@@ -458,6 +419,65 @@ footer {
 
 .footer-links a:hover {
   color: black;
+}
+/*Responsive*/
+/*header*/
+@media screen and (max-width: 1760px) {
+  .header {
+    height: 20vh;
+  }
+  .h1 {
+    padding-top: 70px;
+    font-size: 5rem;
+  }
+}
+
+@media screen and (max-width: 1460px) {
+  .header {
+    height: 27vh;
+  }
+  .car-menu .car-type-heading {
+    padding-top: 70px;
+    font-size: 5rem;
+  }
+  .header li {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .header-navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .selectCar form {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .header-text h1 {
+    font-size: 50px;
+  }
+  .header-text span {
+    font-size: 60px;
+  }
+  .header-text h3 {
+    font-size: 10px;
+  }
+}
+@media screen and (max-width: 832px) {
+  .header-menu a {
+    font-size: 8px;
+  }
+  .header li {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .dropdown .dropbtn {
+    font-size: 8px;
+  }
 }
 
 /*Footer*/

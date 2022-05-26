@@ -202,23 +202,30 @@
 
 <?php 
 if(isset($_POST['edit'])){
-  
+  $date = date("Y-m-d");
+  $dateControl=mysqli_query($con,"SELECT * FROM booking cc Where '$date' <= cc.purchaseDate  and carId='$carId' ");
+  if(mysqli_num_rows($dateControl)>0){
     
-  $sorgu=mysqli_query($con,"SELECT * FROM car_info where carId=$carId");
-  if (mysqli_num_rows($sorgu) === 1) {
-  $sorguRow = mysqli_fetch_assoc($sorgu);
-  $carName=$sorguRow['carName'];
-  $newCarName=$_POST['car-name'];
-  if( $carName==$newCarName){
-
+    echo "<script> alert('you could edit car beacuse its booked now ') </script>";
   }else{
-    $sql = "UPDATE car_info SET carName='$newCarName' WHERE carId=$carId";
-    if ($con->query($sql) === TRUE) {
+    
+
+
+    $sorgu=mysqli_query($con,"SELECT * FROM car_info where carId=$carId");
+    if (mysqli_num_rows($sorgu) === 1) {
+    $sorguRow = mysqli_fetch_assoc($sorgu);
+    $carName=$sorguRow['carName'];
+    $newCarName=$_POST['car-name'];
+    if( $carName==$newCarName){
+
+    }else{
+      $sql = "UPDATE car_info SET carName='$newCarName' WHERE carId=$carId";
+      if ($con->query($sql) === TRUE) {
           
-    } else {
+      } else {
       echo "<script> alert('you could not change car Name') </script>";
+      }
     }
-  }
   $carBrand=$sorguRow['carBrand'];
   $newcarBrand=$_POST['car-brand'];
   if( $carBrand==$newcarBrand){
@@ -407,18 +414,36 @@ if(isset($_POST['edit'])){
       
 }
 
-if(isset($_POST['delete'])){
-  $sql = "DELETE FROM car_info where carId='$carId'";
 
-if ($con->query($sql) === TRUE) {
-  echo "Record deleted successfully";
-} else {
-  echo "<script> alert('you could not delete car') </script>";
-}
+
+  }
+
+
+  if(isset($_POST['delete'])){
+
+    $date = date("Y-m-d");
+    $dateControl=mysqli_query($con,"SELECT * FROM booking cc Where '$date' <= cc.purchaseDate  and carId='$carId' ");
+    if(mysqli_num_rows($dateControl)>0){
+    
+      echo "<script> alert('you could delete car beacuse its booked now ') </script>";
+    }else{
+
+      $sql = "DELETE FROM car_info where carId='$carId'";
   
-  echo "<script type='text/javascript'>window.location.href='manager-cars.php';</script>";
- 
-}
+      if ($con->query($sql) === TRUE) {
+        echo "Record deleted successfully";
+      } else {
+        echo "<script> alert('you could not delete car') </script>";
+      }
+    
+      echo "<script type='text/javascript'>window.location.href='manager-cars.php';</script>";
+   
+    }
+
+  
+  }
+    
+  
 
 
 

@@ -49,7 +49,7 @@
                     <div class="dropdown-content">
                       <a href="account.php#information">Your Information</a>
                       <a href="account.php#change-password">Change Password</a>
-                      <a href="account.php#my-rentals">My Rentals</a>
+                      <a href="account.php#my-current-rentals">My Current Rentals</a>
                     </div>
                   </div>
                 </li>

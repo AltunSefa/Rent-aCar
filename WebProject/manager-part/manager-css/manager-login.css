@@ -262,7 +262,33 @@ h1 {
 /*Responsive*/
 /*header*/
 
+@media screen and (max-width: 1630px) {
+  .header {
+    height: 20vh;
+  }
+  .header-logo-text {
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 1300px) {
+  .header {
+    height: 25vh;
+  }
+  .header-logo-text {
+    font-size: 20px;
+  }
+  .header-navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 @media screen and (max-width: 1160px) {
+  .header {
+    height: 27vh;
+  }
   .header li {
     margin-left: 10px;
     margin-right: 10px;
@@ -270,13 +296,7 @@ h1 {
 }
 @media screen and (max-width: 980px) {
   .header {
-    height: 20vh;
-  }
-  .header-navbar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    height: 35vh;
   }
   .header-text h1 {
     font-size: 50px;

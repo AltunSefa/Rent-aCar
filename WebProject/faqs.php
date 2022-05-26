@@ -1,3 +1,9 @@
+<?php
+
+include('conn.php');
+$result=mysqli_query($con,"SELECT * FROM faqs ");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -58,7 +64,7 @@
                     <div class="dropdown-content">
                       <a href="account.php#information">Your Information</a>
                       <a href="account.php#change-password">Change Password</a>
-                      <a href="account.php#my-rentals">My Rentals</a>
+                      <a href="account.php#my-current-rentals">My Current Rentals</a>
                     </div>
                   </div>
                 </li>
@@ -75,45 +81,18 @@
       <h1 class="title">FAQ's</h1>
 
       <div class="questions-container">
+      <?php while($row = mysqli_fetch_assoc($result)){ ?>
         <div class="question">
           <button>
-            <span>Lorem ipsum dolor sit amet?</span>
+            <span><?php echo $row['question'] ?></span>
             <img src="images/up-arrow.png" alt="" class="d-arrow" />
           </button>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam culpa consequuntur sint! Animi, non maiores!
+          <?php echo $row['answer'] ?>
           </p>
         </div>
-
-        <div class="question">
-          <button>
-            <span>Lorem ipsum dolor sit amet?</span>
-            <img src="images/up-arrow.png" alt="" class="d-arrow" />
-          </button>
-          <p>
-           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad mollitia rerum ratione modi, doloribus laboriosam recusandae consectetur commodi soluta harum deleniti beatae, blanditiis neque. Est, iusto quas. Ut, ab eligendi!
-          </p>
-        </div>
-
-        <div class="question">
-          <button>
-            <span>Lorem ipsum dolor sit amet?</span>
-            <img src="images/up-arrow.png" alt="" class="d-arrow" />
-          </button>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt adipisci voluptates optio et perspiciatis id enim veniam sunt, nobis tempora ratione consectetur aspernatur nostrum eius temporibus minima eaque expedita? Dicta.
-          </p>
-        </div>
-
-        <div class="question">
-          <button>
-            <span>Lorem ipsum dolor sit amet?</span>
-            <img src="images/up-arrow.png" alt="" class="d-arrow" />
-          </button>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis in sapiente necessitatibus quaerat et voluptate optio ipsam labore culpa hic! Eius laboriosam laudantium laborum, deserunt incidunt ipsa recusandae cumque accusamus!
-          </p>
-        </div>
+      <?php } ?>
+        
       </div>
     </section>
     <!-- Footer Start -->

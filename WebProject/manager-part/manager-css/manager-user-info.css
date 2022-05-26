@@ -251,6 +251,11 @@ h1 {
   width: 300px;
   padding: 50px;
 }
+.comment-box h3 {
+  word-break: break-word;
+  table-layout: fixed;
+}
+
 .comment-box img {
   width: 150px;
   border: 2px solid white;

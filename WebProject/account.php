@@ -1,7 +1,7 @@
 <?php 
 session_start();
 include('conn.php');
-if(!empty($_SESSION["email"])){
+if(!empty($_SESSION["email"])){  
   $email = $_SESSION["email"];
   $result=mysqli_query($con,"SELECT * FROM user_info Where eMail = '$email' ");
   $row = mysqli_fetch_assoc($result);
@@ -61,7 +61,7 @@ if(!empty($_SESSION["email"])){
                     <div class="dropdown-content">
                       <a href="account.php#information">Your Information</a>
                       <a href="account.php#change-password">Change Password</a>
-                      <a href="all-car.php#my-rentals">My Rentals</a>
+                      <a href="account.php#my-current-rentals">My Current Rentals</a>
                     </div>
                   </div>
                 </li>
@@ -108,7 +108,7 @@ if(!empty($_SESSION["email"])){
           <li><a href="#information">İnformation</a></li>
           <li><a href="#change-password">Change Password</a></li>
           <li><a href="#my-current-rentals">my current rentals</a></li>
-          <li><a href="#my-rentals">my old rentals</a></li>
+          <li><a href="#my-old-rentals">my old rentals</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="logout.php" name = "logout">Log out</a></li>
           
@@ -203,7 +203,7 @@ if(!empty($_SESSION["email"])){
         $bookedCarId=$rowBooking['carId'];
         $cars=mysqli_query($con,"SELECT * FROM car_info Where carId = '$bookedCarId'");
         $car=mysqli_fetch_assoc($cars);
-        if($rowBooking['purchaseDate']>$date){
+        if($rowBooking['purchaseDate']>=$date){
           
         
         ?>
@@ -242,7 +242,7 @@ if(!empty($_SESSION["email"])){
       </div>
 
     </section>
-
+          <!-- Start My old Rentals -->
     <?php 
     $userId=$row['userId'];
     $resultBooking=mysqli_query($con,"SELECT * FROM booking Where userId = '$userId'");
@@ -251,7 +251,7 @@ if(!empty($_SESSION["email"])){
     ?>
 
 
-    <section class="my-rentals" id="my-current-rentals">
+    <section class="my-rentals" id="my-old-rentals">
       <h3 class="heading">my <span> old Rentals</span></h3>
     
       <div class="car-menu-container">
@@ -299,18 +299,13 @@ if(!empty($_SESSION["email"])){
       </div>
 
     </section>
-    <!-- Finish My Rentals -->
-
-    <!-- Start My old Rentals -->
-    <?php 
-    $userId=$row['userId'];
-    $resultBooking=mysqli_query($con,"SELECT * FROM booking Where userId = '$userId'");
-    
-    
-    ?>
+    <!-- Finish My Old Rentals -->
 
     
-    <!-- Finish My Rentals -->
+    
+
+    
+    
 
     <!-- Starts contact section   -->
 

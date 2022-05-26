@@ -173,7 +173,6 @@ section {
   background-position: center; /* pozisyonu merkeze aldı*/
   background-size: cover; /* resmin olduğu  divi kaplamasını sağlar*/
   background-attachment: fixed; /*sabit kalmasını sağladı*/
-  height: 85vh; /*yüksekliğini(vh dedi çünkü her tipe uygun olması için) sayfa boyunca ayarladı*/
   overflow: hidden;
 }
 section h1 {
@@ -188,73 +187,108 @@ section h1 {
 .title {
   font-size: 50px;
   text-align: center;
-  margin-top: 80px;
+
   margin-bottom: 40px;
   text-decoration: underline 4px;
 }
-.form-group {
+.questions-container {
+  max-width: 800px;
+  margin: 250px auto;
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #fff;
   background-color: rgba(0, 0, 0, 0.575);
   color: black;
   max-height: 200px;
   opacity: 1;
+  color: white;
+  padding: 20px;
 }
-.questions-container {
-  max-width: 800px;
-  margin: 150px auto;
-}
-
 .question {
-  border-bottom: 1px solid #fff;
+  margin-bottom: 30px;
 }
-.question img {
-  background-color: #fff;
-  height: 50px;
-  width: 50px;
-  border-radius: 100px;
-  border: 3px solid #fff;
+.question input {
+  margin-left: 10px;
 }
-.question button {
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.514);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 15px;
+.answer input {
+  margin-left: 20px;
+}
+input {
+  color: white;
+  border: 2px solid white;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0);
+  width: 300px;
+  height: 40px;
+  padding: 0 20px;
+}
+button {
+  display: block;
+  margin-left: 10px;
+  text-align: center;
+  background-color: #f9f9f9;
+  color: black;
+  padding: 10px 30px;
   border: none;
-  outline: none;
-  font-size: 22px;
-  color: #fff;
-  font-weight: 700;
   cursor: pointer;
+  border-radius: 5px;
+  font-size: 20px;
 }
-.question .form-group {
-  font-size: 22px;
-  max-height: 0;
-  opacity: 0;
-  line-height: 1.5;
-  overflow: hidden;
-  transition: all 0.6s ease;
+button:hover {
+  background-color: #f9ca24;
+  color: white;
 }
-.d-arrow {
-  transition: transform 0.5s ease-in;
-  color: #fff;
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+button a {
+  color: black;
+}
+button a:hover {
+  color: white;
 }
 
-/*add this class when click*/
-.question .form-group.show {
-  background-color: rgba(0, 0, 0, 0.575);
-  color: #fff;
-  max-height: 200px;
-  opacity: 1;
-  padding: 0px 15px 30px 15px;
+.question span,
+.answer span {
+  font-size: 1.2rem;
+  text-decoration: underline;
+  color: #f9ca24;
 }
-.question button .d-arrow.rotate {
-  transform: rotate(180deg);
-}
+
 /*Responsive*/
 /*header*/
 
+@media screen and (max-width: 1630px) {
+  .header {
+    height: 20vh;
+  }
+  .header-logo-text {
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 1300px) {
+  .header {
+    height: 25vh;
+  }
+  .header-logo-text {
+    font-size: 20px;
+  }
+  .header-navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 @media screen and (max-width: 1160px) {
+  .header {
+    height: 27vh;
+  }
   .header li {
     margin-left: 10px;
     margin-right: 10px;
@@ -262,13 +296,7 @@ section h1 {
 }
 @media screen and (max-width: 980px) {
   .header {
-    height: 20vh;
-  }
-  .header-navbar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    height: 30vh;
   }
   .header-text h1 {
     font-size: 50px;
@@ -291,5 +319,10 @@ section h1 {
   }
   .dropdown .dropbtn {
     font-size: 8px;
+  }
+}
+@media screen and (max-width: 832px) {
+  button {
+    padding: 10px 15px;
   }
 }

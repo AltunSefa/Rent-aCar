@@ -2,6 +2,10 @@
 include('../conn.php');
 
 session_start();
+if(!empty($_SESSION["email"])){
+  echo "<script> alert('please log out first') </script>";
+  echo "<script type='text/javascript'>window.location.href='manager.php';</script>";
+}
 
 
 ?>

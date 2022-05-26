@@ -2,6 +2,10 @@
 include('conn.php');
 
 session_start();
+if(!empty($_SESSION["email"])){
+  echo "<script> alert('please log out first') </script>";
+  echo "<script type='text/javascript'>window.location.href='index.php';</script>";
+}
 
 
 ?>
@@ -58,7 +62,7 @@ session_start();
                     <div class="dropdown-content">
                       <a href="account.php#information">Your Information</a>
                       <a href="account.php#change-password">Change Password</a>
-                      <a href="account.php#my-rentals">My Rentals</a>
+                      <a href="account.php#my-current-rentals">My Current Rentals</a>
                     </div>
                   </div>
                 </li>

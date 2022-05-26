@@ -67,7 +67,7 @@ $returnDate = $_SESSION['returnDate'];
                     <div class="dropdown-content">
                       <a href="account.php#information">Your Information</a>
                       <a href="account.php#change-password">Change Password</a>
-                      <a href="account.php#my-rentals">My Rentals</a>
+                      <a href="account.php#my-current-rentals">My Current Rentals</a>
                     </div>
                   </div>
                 </li>
@@ -256,10 +256,10 @@ if(isset($_POST['booking'])){
     $sql = "INSERT INTO payment (userId, Name_Surname, `Credit-Card-No`,`Year`,ccv)
     VALUES ('$userId', '$nameSurname','$cardNo','$year','$ccv')";
     if ($con->query($sql) === TRUE) {
-      echo  "<script> alert('payment');</script>";
+      echo  "<script> alert('payment successful');</script>";
 
     } else {
-      echo "<script> alert('you could not register') </script>";
+      echo "<script> alert('you could not payment') </script>";
     }
 
   } 
@@ -282,12 +282,20 @@ if(isset($_POST['booking'])){
     $amount=$dateDifference->d* $price;
    
     $bookId=$_SESSION['bookId'];
-    $updateBooking = ( "UPDATE booking SET  paymentId='$paymentId', carId='$carId',bookingDate='$bookingDate', purchaseDate='$purchaseDate', returnDate='$returnDate', amount='$amount' where bookingId='$bookId' ");
     
-    if ($con->query($updateBooking) === TRUE) {
-        echo  "<script> alert('booking yapıldı');</script>";
-    } else {
-        echo "<script> alert('you could not change BOOKİNG') </script>";
+    $dateControl=mysqli_query($con,"   SELECT * FROM car_info c  WHERE c.carId  in (SELECT cc.carId FROM  booking cc  inner join car_info  on car_info.carId = cc.carId AND  '$purchaseDate' BETWEEN cc.purchaseDate AND cc.returnDate OR '$returnDate' BETWEEN cc.purchaseDate AND cc.returnDate or purchaseDate > '$purchaseDate' and returnDate < '$returnDate') AND c.carId='$carId';");
+    if(mysqli_num_rows($dateControl)==0){
+      $updateBooking = ( "UPDATE booking SET  paymentId='$paymentId', carId='$carId',bookingDate='$bookingDate', purchaseDate='$purchaseDate', returnDate='$returnDate', amount='$amount' where bookingId='$bookId' ");
+    
+      if ($con->query($updateBooking) === TRUE) {
+        echo  "<script> alert('booking successful');</script>";
+        echo "<script type='text/javascript'>window.location.href='account.php#my-current-rentals';</script>";
+      } else {
+          echo "<script> alert('you could not change BOOKİNG') </script>";
+      }
+
+    }else{
+      echo "<script> alert('you should valid date for BOOKİNG') </script>";
     }
     
 

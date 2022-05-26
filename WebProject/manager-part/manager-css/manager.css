@@ -171,11 +171,31 @@ h3 {
 }
 /*Responsive*/
 /*header*/
-
+@media screen and (max-width: 1235px) {
+  .row {
+    margin-top: 150px;
+  }
+  .box h1 {
+    font-size: 30px;
+  }
+}
 @media screen and (max-width: 1160px) {
   .header li {
     margin-left: 10px;
     margin-right: 10px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .box {
+    width: 200px;
+    height: 200px;
+  }
+  .row h1,
+  h5 {
+    font-size: 20px;
+  }
+  .row h5 {
+    margin-top: 50px;
   }
 }
 @media screen and (max-width: 980px) {
@@ -206,5 +226,17 @@ h3 {
   }
   .dropdown .dropbtn {
     font-size: 8px;
+  }
+}
+@media screen and (max-width: 770px) {
+  .row {
+    display: flex;
+    flex-direction: column;
+  }
+  .box {
+    margin-bottom: 40px;
+  }
+  .header {
+    height: auto;
   }
 }

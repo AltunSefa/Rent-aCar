@@ -67,7 +67,7 @@ $returnDate = $_SESSION['returnDate'];
                     <div class="dropdown-content">
                       <a href="account.php#information">Your Information</a>
                       <a href="account.php#change-password">Change Password</a>
-                      <a href="account.php#my-rentals">My Rentals</a>
+                      <a href="account.php#my-current-rentals">My Current Rentals</a>
                     </div>
                   </div>
                 </li>
@@ -143,6 +143,14 @@ $returnDate = $_SESSION['returnDate'];
                   
                   ?></h5>
                 </div>
+              </div>
+              <div class="Amount">
+                <p><?php 
+                $dateDifference = date_diff(date_create($purchaseDate), date_create($returnDate));
+                $price=$car['price'];
+                $amount=$dateDifference->d* $price;
+                echo 'Total Amount : '.$amount;
+                ?></p>
               </div>
             </div>
           </div>
@@ -256,10 +264,10 @@ if(isset($_POST['booking'])){
     $sql = "INSERT INTO payment (userId, Name_Surname, `Credit-Card-No`,`Year`,ccv)
     VALUES ('$userId', '$nameSurname','$cardNo','$year','$ccv')";
     if ($con->query($sql) === TRUE) {
-      echo  "<script> alert('payment');</script>";
+      echo  "<script> alert('payment  successful');</script>";
 
     } else {
-      echo "<script> alert('you could not register') </script>";
+      echo "<script> alert('you could not payment') </script>";
     }
 
   } 
@@ -280,17 +288,31 @@ if(isset($_POST['booking'])){
     $dateDifference = date_diff(date_create($purchaseDate), date_create($returnDate));
     $price=$car['price'];
     $amount=$dateDifference->d* $price;
-   
     
-      $sql2 = "INSERT INTO booking (paymentId,carId, userId, bookingDate,purchaseDate,returnDate,amount)
-    VALUES ($paymentId,'$carId', '$userId','$bookingDate','$purchaseDate','$returnDate','$amount ')";
-    if ($con->query($sql2) === TRUE) {
-      echo  "<script> alert('booking yapıldı');</script>";
-     
 
-    } else {
-      echo "<script> alert('you could not register') </script>";
+    // $dateControl=mysqli_query($con,"SELECT * FROM booking cc Where '$purchaseDate' BETWEEN cc.purchaseDate AND cc.returnDate
+    // OR '$returnDate' BETWEEN cc.purchaseDate AND cc.returnDate or purchaseDate > '$purchaseDate' and returnDate < '$returnDate' and carId = '$carId'");
+
+    $dateControl=mysqli_query($con,"   SELECT * FROM car_info c  WHERE c.carId  in (SELECT cc.carId FROM  booking cc  inner join car_info  on car_info.carId = cc.carId AND  '$purchaseDate' BETWEEN cc.purchaseDate AND cc.returnDate OR '$returnDate' BETWEEN cc.purchaseDate AND cc.returnDate or purchaseDate > '$purchaseDate' and returnDate < '$returnDate') AND c.carId='$carId';");
+
+    if(mysqli_num_rows($dateControl)==0){
+      $sql2 = "INSERT INTO booking (paymentId,carId, userId, bookingDate,purchaseDate,returnDate,amount)
+      VALUES ($paymentId,'$carId', '$userId','$bookingDate','$purchaseDate','$returnDate','$amount ')";
+      if ($con->query($sql2) === TRUE) {
+        echo  "<script> alert('booking successful');</script>";
+        echo "<script type='text/javascript'>window.location.href='account.php#my-current-rentals';</script>";
+       
+  
+      } else {
+        echo "<script> alert('you could not register') </script>";
+      }
+    }else{
+      echo "<script> alert('invalid booking date') </script>";
+      echo "<script type='text/javascript'>window.location.href='car-booking.php';</script>";
     }
+    
+
+    
     
     
     $con->close();
