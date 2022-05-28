@@ -325,4 +325,7 @@ button a:hover {
   button {
     padding: 10px 15px;
   }
+  .questions {
+    margin: 30px;
+  }
 }

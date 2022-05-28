@@ -598,6 +598,9 @@ footer {
   }
 }
 @media screen and (max-width: 832px) {
+  .header {
+    height: 27vh;
+  }
   .header-menu a {
     font-size: 8px;
   }
@@ -685,5 +688,8 @@ footer {
     height: 10rem;
     overflow: hidden;
     width: 100%;
+  }
+  .car-box img {
+    height: 7rem;
   }
 }

@@ -7,6 +7,7 @@
  
  $result=mysqli_query($con,"SELECT * FROM car_info ");
  $branchs=mysqli_query($con,"SELECT * FROM carbranch ");
+ $types=mysqli_query($con,"SELECT * FROM cartype ");
  if($_GET){
   $bokingId=$_GET['bookId'];
 
@@ -89,16 +90,33 @@
 
         <form action="" method="post">
           <select name="SelectBranch" required class="select">
-          <option value="" disabled selected>Select branch</option>
-          <?php 
+            <option value="" disabled selected>Select branch</option>
+            <?php 
           
-            while($branch=mysqli_fetch_assoc($branchs)){
-          ?>
+              while($branch=mysqli_fetch_assoc($branchs)){
+            ?>
       
-          <option value="<?php echo $branch['branch'];?>"><?php echo $branch['branch'];?></option>
-          <?php } ?>
+            <option value="<?php echo $branch['branch'];?>"><?php echo $branch['branch'];?></option>
+            <?php } ?>
+        
+          </select>
+          <select name="SelectType" required class="select">
+            <option value="" disabled selected>Select type</option>
+            <?php 
+          
+              while($type=mysqli_fetch_assoc($types)){
+            ?>
+      
+            <option value="<?php echo $type['type'];?>"><?php echo $type['type'];?></option>
+            <?php } ?>
+        
+          </select>
+
+
           <input type="date" class="select" required name="purchaseDate" min="<?php echo date("Y-m-d"); ?>" />
           <input type="date"class="select" required name="returnDate"  min="<?php echo date("Y-m-d"); ?>" />
+
+          
       
           <button type="submit" class="btn" name="show">show</button>
 
@@ -121,11 +139,12 @@
               $_SESSION['purchaseDate']=$_POST['purchaseDate'];
               $_SESSION['returnDate']=$_POST['returnDate'];
               $branchName=$_POST['SelectBranch'];
+              $typeName=$_POST['SelectType'];
               $purchaseDate=$_POST['purchaseDate'];
               $returnDate=$_POST['returnDate'];
         
-              $invalidCar=mysqli_query($con,"SELECT * FROM car_info c inner join carbranch cb on cb.branchdId=c.branchdId  WHERE c.carId not in (SELECT cc.carId FROM  booking cc  inner join car_info  on car_info.carId = cc.carId AND  '$purchaseDate' BETWEEN cc.purchaseDate AND cc.returnDate
-              OR '$returnDate' BETWEEN cc.purchaseDate AND cc.returnDate or purchaseDate > '$purchaseDate' and returnDate < '$returnDate') AND cb.branch LIKE '%".$branchName."%' ");
+              $invalidCar=mysqli_query($con,"SELECT * FROM car_info c inner join carbranch cb on cb.branchdId=c.branchdId inner join cartype ct on c.carTypeId =ct.typeId WHERE c.carId not in (SELECT cc.carId FROM  booking cc  inner join car_info  on car_info.carId = cc.carId AND  '$purchaseDate' BETWEEN cc.purchaseDate AND cc.returnDate
+              OR '$returnDate' BETWEEN cc.purchaseDate AND cc.returnDate or purchaseDate > '$purchaseDate' and returnDate < '$returnDate') AND cb.branch LIKE '%".$branchName."%' AND ct.type LIKE '%".$typeName."%'  ");
               
                 
         

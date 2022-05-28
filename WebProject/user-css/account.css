@@ -762,9 +762,6 @@ footer {
   .header {
     height: 20vh;
   }
-  .choice {
-    top: 20vh;
-  }
   .header-navbar {
     display: flex;
     flex-direction: column;
@@ -782,6 +779,9 @@ footer {
   }
 }
 @media screen and (max-width: 832px) {
+  .header {
+    height: 27vh;
+  }
   .header-menu a {
     font-size: 8px;
   }
@@ -789,7 +789,7 @@ footer {
     margin-left: 5px;
     margin-right: 5px;
   }
-  .dropdown .dropbtn {
+  header .dropdown .dropbtn {
     font-size: 8px;
   }
 }
@@ -835,7 +835,7 @@ footer {
     overflow-x: hidden;
   }
   body {
-    background-color: #333;
+    background-color: #111;
     overflow-x: hidden;
     padding-left: 0;
     padding-top: 0;
@@ -845,7 +845,7 @@ footer {
   }
   .choice {
     padding-top: 50px;
-    top: 0;
+    top: 70px;
     position: relative;
     background: #111;
     display: flex;
@@ -857,5 +857,8 @@ footer {
   }
   .car-menu-container {
     padding: 0;
+  }
+  .information {
+    margin-top: 30px;
   }
 }

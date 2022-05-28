@@ -406,7 +406,6 @@ footer {
 }
 /*Responsive*/
 /*header*/
-
 @media screen and (max-width: 1160px) {
   .header li {
     margin-left: 10px;
@@ -434,6 +433,9 @@ footer {
   }
 }
 @media screen and (max-width: 832px) {
+  .header {
+    height: 27vh;
+  }
   .header-menu a {
     font-size: 8px;
   }

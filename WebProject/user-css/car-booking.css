@@ -550,4 +550,7 @@ footer {
     overflow: hidden;
     width: 100%;
   }
+  .car-box img {
+    height: 7rem;
+  }
 }

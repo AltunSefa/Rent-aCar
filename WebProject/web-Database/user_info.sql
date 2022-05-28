@@ -6,7 +6,7 @@ CREATE TABLE `user_info` (
   `eMail` varchar(45) NOT NULL,
   `phoneNumber` varchar(45) DEFAULT NULL,
   `password` varchar(45) NOT NULL,
-  `age` int ,
+  `age` varchar(45) ,
   `gender` varchar(45) ,
   `date` date DEFAULT NULL,
   `userImg` varchar(45) ,

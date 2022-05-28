@@ -132,15 +132,13 @@ if(!empty($_SESSION["email"])){
           </div>
           <div class="form-group">
             <label for="name">Age</label>
-            <input type="text" name="age" required value="<?php if(!empty($row['age'])){
+            <input type="text" name="age"  value="<?php if(!empty($row['age'])){
           echo  $row['age'];
-        }else{
-          
         } ?>" />
           </div>
           <div class="form-group">
             <label for="name">Gender</label>
-            <input type="text" name="gender" required value="<?php if(!empty($row['gender'])){
+            <input type="text" name="gender"  value="<?php if(!empty($row['gender'])){
           echo  $row['gender'];
         }else{
           
@@ -261,7 +259,7 @@ if(!empty($_SESSION["email"])){
         $bookedCarId=$rowBooking['carId'];
         $cars=mysqli_query($con,"SELECT * FROM car_info Where carId = '$bookedCarId'");
         $car=mysqli_fetch_assoc($cars);
-        if($rowBooking['returnDate']<$date){
+        if($rowBooking['purchaseDate']<$date){
           
         
         ?>
@@ -418,7 +416,7 @@ if(isset($_POST['aboutMeBtn'])){
   }
   $newAge=$_POST['age'];
   $age=$row['age'];
-  if($newAge===$age){
+  if($newAge==$age){
 
   }else{
     $sql = "UPDATE user_info SET age='$newAge' WHERE userId=$userId";
@@ -456,12 +454,15 @@ if(isset($_POST['aboutMeBtn'])){
       echo "<script> alert('you could not change your Phone') </script>";
     }
       
-    $con->close();
+    
   }
+  
+  
 
   
-  echo "<script type='text/javascript'>window.location.href='account.php';</script>";
-}    
+  echo "<script type='text/javascript'>window.location.href='account.php';</script>"; 
+}
+   
 
 if(isset($_POST['passwordBtn'])){
   $oldPassword=$_POST['oldPassword'];
@@ -475,7 +476,7 @@ if(isset($_POST['passwordBtn'])){
       $newPassword=md5($newPassword);
       $sql = "UPDATE user_info SET password='$newPassword' WHERE UserId=$userId";
       if ($con->query($sql) === TRUE) {
-        echo "<script> alert('you change your Phone') </script>";
+        echo "<script> alert('you change your password') </script>";
       } else {
         echo "<script> alert('you could not change your password') </script>";
       }
