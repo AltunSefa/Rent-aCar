@@ -87,6 +87,7 @@ if(!empty($_SESSION["email"])){
           ?></h5>
           <div class="price">$<?php echo $car['price'] ?></div>
           <a href="manager-edit.php?carId=<?php echo $car['carId'] ?>" class="btn">Edit</a>
+          <a href="manager-car-booking.php?carId=<?php echo $car['carId'] ?>" class="btn">Show Bookings</a>
         </div>
         <?php } 
 

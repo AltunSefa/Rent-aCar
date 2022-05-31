@@ -82,7 +82,7 @@ if(!empty($_SESSION["email"])){
           </div>
           <div class="form-group">
             <label for="name">Age</label>
-            <input type="text" name="Age" required value="<?php if(!empty($row['age'])){
+            <input type="text" name="Age"  value="<?php if(!empty($row['age'])){
           echo  $row['age'];
         }else{
           
@@ -90,7 +90,7 @@ if(!empty($_SESSION["email"])){
           </div>
           <div class="form-group">
             <label for="name">Gender</label>
-            <input type="text" name="Gender" required value="<?php if(!empty($row['gender'])){
+            <input type="text" name="Gender"  value="<?php if(!empty($row['gender'])){
           echo  $row['gender'];
         }else{
           

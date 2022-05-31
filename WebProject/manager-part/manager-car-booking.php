@@ -7,8 +7,8 @@ session_start();
   }else{
     echo "<script type='text/javascript'>window.location.href='manager-login.php';</script>";
   }
-  
-  $branchs=mysqli_query($con,"SELECT * FROM carbranch ");
+  $carId=$_GET['carId'];
+  $result=mysqli_query($con,"select * from booking b inner join car_info c on b.carId = c.carId inner join user_info u on u.userId = b.userId where b.carId='$carId'");
 
 ?>
 <!DOCTYPE html>
@@ -53,32 +53,14 @@ session_start();
     <!-- booking -->
     <section>
       <div class="bookingname">
-        <h1>Bookings</h1>
-      </div>
-      <div>
-        <form action="" method="post">
-        <select name="SelectBranch" required class="select">
-            <option value="" disabled selected>Select branch</option>
-            <?php 
-          
-              while($branch=mysqli_fetch_assoc($branchs)){
-            ?>
-      
-            <option value="<?php echo $branch['branch'];?>"><?php echo $branch['branch'];?></option>
-            <?php } ?>
-            <option value="">all</option>
         
-        </select>
-        <button type="submit" class="btn" name="show">show</button>
-        </form>
-
+        <h1> This Car Bookings</h1>
       </div>
       <div class="tablo" style="overflow-x: auto;">
       <table>
         <thead>
           <tr>
             <th>Car Name</th>
-            <th>car_info</th>
             <th>Booking Date</th>
             <th>Purchase Date</th>
             <th>Return Date</th>
@@ -91,18 +73,9 @@ session_start();
           </tr>
         </thead>
         <tbody>
-          <?php
-        if(isset($_POST['show'])){
-            $branchName=$_POST['SelectBranch'];
-            $result=mysqli_query($con,"select b.carId,c.carName,b.bookingDate,b.purchaseDate,b.returnDate,b.amount,u.userId,u.userName,cb.branch from booking b inner join car_info c on b.carId=c.carId inner join user_info u on u.userId = b.userId inner join carbranch cb on c.branchdId=cb.branchdId  AND cb.branch LIKE '%".$branchName."%'   ");
-         
-          
-          
-          
-          while($book=mysqli_fetch_assoc($result)){ ?>
+          <?php while($book=mysqli_fetch_assoc($result)){ ?>
           <tr>
-            <td><?php echo $book['carName'] ?></td>
-            <td> <a href="manager-edit.php?carId=<?php echo $book['carId'] ?>" class="btn">Show Car Details</a></td>
+           <td><?php echo $book['carName'] ?></td>
             <td><?php echo $book['bookingDate'] ?></td>
             <td><?php echo $book['purchaseDate'] ?></td>
             <td><?php echo $book['returnDate'] ?></td>
@@ -111,7 +84,7 @@ session_start();
             <td><a href="manager-user-info.php?userId=<?php echo $book['userId'] ?>" class="btn">Show User Details</a></td>
             
           </tr>
-          <?php }  } ?>
+          <?php } ?>
         </tbody>
 
 

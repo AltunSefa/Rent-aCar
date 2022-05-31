@@ -11,7 +11,7 @@ include('../conn.php');
     echo 'hata var';
   }
 
-  
+  $resultB=mysqli_query($con,"select * from booking b inner join car_info c on b.carId = c.carId inner join user_info u on u.userId = b.userId where b.userId='$userId'");
 
 ?>
 
@@ -138,6 +138,44 @@ include('../conn.php');
             </h3>
             
             
+          </div>
+          
+          <div class="booking">
+          <div class="tablo" style="overflow-x: auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Car Name</th>
+            <th>Car info</th>
+            <th>Booking Date</th>
+            <th>Purchase Date</th>
+            <th>Return Date</th>
+            <th>Booking Price</th>
+            <th>User Name</th>
+            
+
+
+
+          </tr>
+        </thead>
+        <tbody>
+          <?php while($book=mysqli_fetch_assoc($resultB)){ ?>
+          <tr>
+           <td><?php echo $book['carName'] ?></td>
+           <td><a href="manager-edit.php?carId=<?php echo $book['carId'] ?>" class="btn">Show Car Details</a></td>
+            <td><?php echo $book['bookingDate'] ?></td>
+            <td><?php echo $book['purchaseDate'] ?></td>
+            <td><?php echo $book['returnDate'] ?></td>
+            <td><?php echo $book['amount'] ?></td>
+            <td><?php echo $book['userName'] ?></td>
+            
+          </tr>
+          <?php } ?>
+        </tbody>
+
+
+      </table>
+      </div>
           </div>
         </div>
       </div>
