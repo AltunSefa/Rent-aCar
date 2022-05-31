@@ -14,6 +14,7 @@ CREATE TABLE `car_info` (
   `fuelId` int NOT NULL,
   `passengerId` int NOT NULL,
   `branchdId` int NOT NULL,
+  `car_status` int,
   
   PRIMARY KEY (`carId`),
   foreign key (carSegmentId) References carsegment (segmentId),

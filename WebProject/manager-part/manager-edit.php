@@ -186,6 +186,13 @@
                 <?php } ?>
               </select>
             </div>
+            <div class="form-group">
+              <select name="car-durability" required >
+                <option value="" disabled selected> car durability</option>
+              <option value="0">the car is broken</option>
+              <option value="1">in good condition</option>
+              </select>
+            </div>
 
             <div class="buttons">
               <button class="btn" id="btn" type="submit" name="edit">Edit</button>
@@ -407,6 +414,19 @@ if(isset($_POST['edit'])){
     }
   }
 
+  $carStatus=$_POST['car-durability'];
+  $carStatusRow=$sorguRow['car_status'];
+  if( $carStatus==$carStatusRow){
+
+  }else{
+    $sql = "UPDATE car_info SET car_status='$carStatus' WHERE carId=$carId";
+    if ($con->query($sql) === TRUE) {
+        
+    } else {
+    echo "<script> alert('you could not change car Name') </script>";
+    }
+  }
+
   echo "<script type='text/javascript'>window.location.href='manager-cars.php';</script>";
   $con->close();
 
@@ -442,6 +462,7 @@ if(isset($_POST['edit'])){
 
   
   }
+
     
   
 

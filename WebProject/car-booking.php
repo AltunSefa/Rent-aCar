@@ -144,7 +144,7 @@
               $returnDate=$_POST['returnDate'];
         
               $invalidCar=mysqli_query($con,"SELECT * FROM car_info c inner join carbranch cb on cb.branchdId=c.branchdId inner join cartype ct on c.carTypeId =ct.typeId WHERE c.carId not in (SELECT cc.carId FROM  booking cc  inner join car_info  on car_info.carId = cc.carId AND  '$purchaseDate' BETWEEN cc.purchaseDate AND cc.returnDate
-              OR '$returnDate' BETWEEN cc.purchaseDate AND cc.returnDate or purchaseDate > '$purchaseDate' and returnDate < '$returnDate') AND cb.branch LIKE '%".$branchName."%' AND ct.type LIKE '%".$typeName."%'  ");
+              OR '$returnDate' BETWEEN cc.purchaseDate AND cc.returnDate or purchaseDate > '$purchaseDate' and returnDate < '$returnDate') AND cb.branch LIKE '%".$branchName."%' AND ct.type LIKE '%".$typeName."%' and c.car_status=1 ");
               
                 
         
